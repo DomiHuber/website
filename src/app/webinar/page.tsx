@@ -23,7 +23,7 @@ export default function WebinarPage() {
     });
   };
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!registerData.name || !registerData.email) {
       toast({
@@ -32,7 +32,21 @@ export default function WebinarPage() {
       });
       return;
     }
-    // Here you would typically send the form data to your backend
+
+    // Submit to Netlify Forms
+    const formData = new FormData();
+    formData.append('form-name', 'webinar-registration');
+    formData.append('name', registerData.name);
+    formData.append('email', registerData.email);
+    formData.append('timeSlot', registerData.timeSlot);
+
+    // Submit to Netlify (fire and forget)
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData as any).toString(),
+    }).catch(() => {}); // Silently fail if Netlify submission fails
+
     toast({
       title: "Registration successful!",
       description: `You've been registered for the webinar on 21 Jan 2026 at ${registerData.timeSlot}. Check your email for confirmation.`,
