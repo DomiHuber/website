@@ -1,0 +1,129 @@
+[build]
+  command = "npm run build"
+  # Publish directory handled automatically by @netlify/plugin-nextjs
+
+# Use Netlify Next.js plugin for optimal Next.js support
+# Install with: npm install --save-dev @netlify/plugin-nextjs
+# This plugin automatically handles:
+# - Next.js serverless functions
+# - Image optimization
+# - Incremental static regeneration (ISR)
+# - Edge functions
+# - API routes
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Old article URL redirects (with trailing slashes)
+[[redirects]]
+  from = "/beyond-the-hype-why-leaders-need-bitcoin-expertise-now/"
+  to = "/research/beyond-the-hype"
+  status = 301
+
+[[redirects]]
+  from = "/btc-as-big-as-internet-bitcoin-intelligence/"
+  to = "/research/bitcoin-intelligence-advantage"
+  status = 301
+
+[[redirects]]
+  from = "/introduction-bitcoin-treasury-companies/"
+  to = "/research/SBI-001"
+  status = 301
+
+[[redirects]]
+  from = "/state-of-bitcoin-payment-stack/"
+  to = "/research/SBI-002"
+  status = 301
+
+[[redirects]]
+  from = "/switzerlands-digital-currency-strategy/"
+  to = "/research/SBI-003"
+  status = 301
+
+[[redirects]]
+  from = "/inflation-by-design-deflation-by-technology/"
+  to = "/research/SBI-004"
+  status = 301
+
+[[redirects]]
+  from = "/a-quantum-of-solace/"
+  to = "/research/SBI-005"
+  status = 301
+
+[[redirects]]
+  from = "/abundant-power-real-value/"
+  to = "/research/SBI-006"
+  status = 301
+
+[[redirects]]
+  from = "/the-rise-and-reckoning-of-the-bitcoin-treasury/"
+  to = "/research/SBI-007"
+  status = 301
+
+# Old article URL redirects (without trailing slashes)
+[[redirects]]
+  from = "/beyond-the-hype-why-leaders-need-bitcoin-expertise-now"
+  to = "/research/beyond-the-hype"
+  status = 301
+
+[[redirects]]
+  from = "/btc-as-big-as-internet-bitcoin-intelligence"
+  to = "/research/bitcoin-intelligence-advantage"
+  status = 301
+
+[[redirects]]
+  from = "/introduction-bitcoin-treasury-companies"
+  to = "/research/SBI-001"
+  status = 301
+
+[[redirects]]
+  from = "/state-of-bitcoin-payment-stack"
+  to = "/research/SBI-002"
+  status = 301
+
+[[redirects]]
+  from = "/switzerlands-digital-currency-strategy"
+  to = "/research/SBI-003"
+  status = 301
+
+[[redirects]]
+  from = "/inflation-by-design-deflation-by-technology"
+  to = "/research/SBI-004"
+  status = 301
+
+[[redirects]]
+  from = "/a-quantum-of-solace"
+  to = "/research/SBI-005"
+  status = 301
+
+[[redirects]]
+  from = "/abundant-power-real-value"
+  to = "/research/SBI-006"
+  status = 301
+
+[[redirects]]
+  from = "/the-rise-and-reckoning-of-the-bitcoin-treasury"
+  to = "/research/SBI-007"
+  status = 301
+
+# Old page redirects
+[[redirects]]
+  from = "/meet-the-team/"
+  to = "/meet-the-team"
+  status = 301
+
+[[redirects]]
+  from = "/switzerland-bitcoin-values/"
+  to = "/switzerland-bitcoin"
+  status = 301
+
+[[redirects]]
+  from = "/switzerland-bitcoin-values"
+  to = "/switzerland-bitcoin"
+  status = 301
+
+# Note: API routes are automatically handled by @netlify/plugin-nextjs
+# No manual redirect needed for /api/* routes
+
+[build.environment]
+  NODE_VERSION = "18"
+

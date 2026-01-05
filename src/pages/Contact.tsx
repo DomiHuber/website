@@ -1,10 +1,10 @@
+"use client";
+
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Calendar, ArrowRight, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import CTAButton from '@/components/ui/cta-button';
 import { useToast } from '@/hooks/use-toast';
 
@@ -14,7 +14,6 @@ const Contact = () => {
     name: '',
     organization: '',
     email: '',
-    phone: '',
     subject: '',
     message: '',
     engagementType: ''
@@ -25,13 +24,12 @@ const Contact = () => {
     // Here you would typically send the form data to your backend
     toast({
       title: "Message sent successfully!",
-      description: "We'll get back to you within 24 hours.",
+      description: "We'll get back to you soon.",
     });
     setFormData({
       name: '',
       organization: '',
       email: '',
-      phone: '',
       subject: '',
       message: '',
       engagementType: ''
@@ -45,61 +43,27 @@ const Contact = () => {
     });
   };
 
-  const contactMethods = [
-    {
-      icon: Mail,
-      title: "General Inquiries",
-      value: "hello@bitcoininstitute.ch",
-      href: "mailto:hello@bitcoininstitute.ch"
-    },
-    {
-      icon: Phone,
-      title: "Direct Line",
-      value: "+41 XX XXX XX XX",
-      href: "tel:+41XXXXXXXXX"
-    },
-    {
-      icon: MapPin,
-      title: "Location", 
-      value: "Crypto Valley, Zug, Switzerland",
-      href: "#"
-    },
-    {
-      icon: Calendar,
-      title: "Response Time",
-      value: "Within 24 hours",
-      href: "#"
-    }
-  ];
-
   const engagementTypes = [
     {
-      title: "Executive Briefing",
-      description: "Strategic Bitcoin insights for C-suite leaders",
-      duration: "60-90 minutes",
-      format: "In-person or virtual",
-      href: "/briefing"
+      title: "Education",
+      description: "From 1:1 bespoke sessions to more formal courses",
+      icon: "🎓",
+      primaryCta: { text: "Explore options", link: "/education" },
+      secondaryCta: { text: "Book discovery Call", link: "/inquiry?service=courses" }
     },
     {
-      title: "Public Speaking",
-      description: "Keynotes and presentations at your events",
-      duration: "45-60 minutes",
-      format: "Conference or private event",
-      href: "/speaker"
+      title: "Research",
+      description: "Actionable insights on Bitcoin's strategic implications",
+      icon: "🧠",
+      primaryCta: { text: "View offering", link: "/research" },
+      secondaryCta: { text: "Next Free Webinar", link: "/webinar" }
     },
     {
-      title: "Research Partnership",
-      description: "Collaborative research and white paper development",
-      duration: "3-6 months",
-      format: "Ongoing collaboration",
-      href: "#"
-    },
-    {
-      title: "Educational Workshop",
-      description: "Interactive learning sessions for teams",
-      duration: "Half or full day",
-      format: "On-site or virtual",
-      href: "#"
+      title: "Speaking",
+      description: "Keynotes that get the message across and encourage reflection",
+      icon: "🎤",
+      primaryCta: { text: "View talks", link: "/speaking" },
+      secondaryCta: { text: "Book discovery Call", link: "/inquiry?service=speaking" }
     }
   ];
 
@@ -107,215 +71,253 @@ const Contact = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="swiss-hero swiss-gradient relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-bitcoin-orange/10 via-transparent to-gray-900/5"></div>
+        <div className="absolute inset-0 swiss-blue-gradient-hero"></div>
         <div className="swiss-grid relative">
           <div className="max-w-4xl mx-auto text-center">
             <div className="mb-8">
-              <span className="inline-flex items-center px-6 py-3 rounded-full bg-swiss-blue/10 text-swiss-blue text-lg font-semibold mb-8">
-                💬 Let's Connect
+              <span className="pill-hero mb-6">
+                <span className="mr-2">💬</span>
+                <span className="pill-hero-text">Let's Connect</span>
               </span>
             </div>
             <h1 className="mb-10 text-gray-900">Get in Touch</h1>
             <p className="swiss-prose-lg mb-12 max-w-3xl mx-auto text-gray-700 leading-relaxed">
-              Ready to advance your Bitcoin understanding? Whether you need strategic insights, 
+              Ready to advance your Bitcoin understanding? Whether you need strategic insights,
               educational workshops, or research collaboration, our team is here to help.
             </p>
-            <div className="flex justify-center space-x-12 text-center">
-              <div>
-                <div className="text-4xl font-bold text-bitcoin-orange mb-2">&lt; 24h</div>
-                <div className="text-gray-600">Response Time</div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-bitcoin-orange mb-2">50+</div>
-                <div className="text-gray-600">Organizations Served</div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-bitcoin-orange mb-2">5+</div>
-                <div className="text-gray-600">Languages</div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Contact Methods */}
+      {/* Contact Form */}
       <section className="swiss-section bg-white">
         <div className="swiss-grid">
-          <div className="text-center mb-16">
-            <h2 className="mb-8 text-gray-900">How to Reach Us</h2>
-            <p className="swiss-prose max-w-3xl mx-auto text-gray-600">
-              Multiple ways to connect with our team of Bitcoin experts.
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-12">
+            <div className="flex items-center justify-center mb-6">
+              <div className="swiss-blue-gradient-accent mx-auto"></div>
+            </div>
+              <h2>Send Us a Message</h2>
+              <p className="swiss-prose max-w-2xl mx-auto text-gray-600 mt-4">
+                Tell us about your Bitcoin education and strategy needs.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {contactMethods.map((method, index) => (
-              <div key={index} className="text-center group">
-                <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-swiss-blue/10 to-swiss-blue/5 rounded-2xl flex items-center justify-center group-hover:from-swiss-blue/20 group-hover:to-swiss-blue/10 transition-all duration-300">
-                  <method.icon className="w-8 h-8 text-swiss-blue" />
-                </div>
-                <h3 className="text-lg font-semibold mb-3 text-gray-900">{method.title}</h3>
-                <a 
-                  href={method.href}
-                  className="text-gray-600 hover:text-swiss-blue transition-colors duration-300 font-medium"
-                >
-                  {method.value}
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Form & Engagement Types */}
-      <section className="swiss-section bg-gradient-to-b from-gray-50 to-white">
-        <div className="swiss-grid">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Contact Form */}
-            <div>
-              <div className="mb-8">
-                <h2 className="text-3xl font-semibold mb-4 text-gray-900">Send Us a Message</h2>
-                <p className="text-gray-600 text-lg">
-                  Tell us about your Bitcoin education and strategy needs.
-                </p>
-              </div>
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Full Name *
-                    </label>
-                    <Input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Your full name"
-                      className="h-12"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Organization
-                    </label>
-                    <Input
-                      type="text"
-                      name="organization"
-                      value={formData.organization}
-                      onChange={handleInputChange}
-                      placeholder="Company or institution"
-                      className="h-12"
-                    />
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Email Address *
-                    </label>
-                    <Input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="your.email@company.com"
-                      className="h-12"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Phone Number
-                    </label>
-                    <Input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      placeholder="+41 XX XXX XX XX"
-                      className="h-12"
-                    />
-                  </div>
-                </div>
-
+            
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Subject *
+                    Full Name *
                   </label>
                   <Input
                     type="text"
-                    name="subject"
-                    value={formData.subject}
+                    name="name"
+                    value={formData.name}
                     onChange={handleInputChange}
                     required
-                    placeholder="What can we help you with?"
+                    placeholder="Your full name"
                     className="h-12"
                   />
                 </div>
-
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Message *
+                    Organization
                   </label>
-                  <Textarea
-                    name="message"
-                    value={formData.message}
+                  <Input
+                    type="text"
+                    name="organization"
+                    value={formData.organization}
                     onChange={handleInputChange}
-                    required
-                    placeholder="Tell us more about your needs, timeline, and any specific requirements..."
-                    rows={6}
-                    className="resize-none"
+                    placeholder="Company or institution"
+                    className="h-12"
                   />
                 </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Email Address *
+                </label>
+                <Input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="your.email@company.com"
+                  className="h-12"
+                />
+              </div>
 
-                <Button 
-                  type="submit" 
-                  className="w-full h-12 text-lg font-semibold bg-bitcoin-orange hover:bg-bitcoin-orange-hover"
-                >
-                  <Send className="w-5 h-5 mr-2" />
-                  Send Message
-                </Button>
-              </form>
-            </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Subject *
+                </label>
+                <Input
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="What can we help you with?"
+                  className="h-12"
+                />
+              </div>
 
-            {/* Engagement Types */}
-            <div>
-              <div className="mb-8">
-                <h2 className="text-3xl font-semibold mb-4 text-gray-900">Ways to Engage</h2>
-                <p className="text-gray-600 text-lg">
-                  Explore our different service offerings and find the right fit for your needs.
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Message *
+                </label>
+                <Textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Tell us more about your needs, timeline, and any specific requirements..."
+                  rows={6}
+                  className="resize-none"
+                />
+              </div>
+
+              <Button 
+                type="submit" 
+                className="w-full h-12 text-lg font-semibold swiss-blue-gradient btn-hover-scale text-white"
+              >
+                <Send className="w-5 h-5 mr-2" />
+                Send Message
+              </Button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Swiss Bitcoin Institute */}
+      <section className="swiss-section bg-white">
+        <div className="swiss-grid">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-semibold text-gray-900 mb-6">Why Choose Swiss Bitcoin Institute</h2>
+            <p className="swiss-prose-lg text-gray-600 mb-12">
+              Switzerland's independent Bitcoin think tank combines academic rigor with practical expertise.
+              Our neutral perspective, technical depth, and commitment to evidence-based analysis make us
+              the trusted partner for organizations navigating the Bitcoin transformation.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-swiss-blue/10 rounded-full flex items-center justify-center">
+                  <span className="text-2xl">🇨🇭</span>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Swiss Excellence</h3>
+                <p className="text-gray-600 text-sm">
+                  Precision, neutrality, and institutional quality that Switzerland is known for, applied to Bitcoin.
                 </p>
               </div>
 
-              <div className="space-y-6">
-                {engagementTypes.map((type, index) => (
-                  <Card key={index} className="group hover:shadow-lg transition-all duration-300 border-gray-200 hover:border-bitcoin-orange/30">
-                    <CardContent className="p-6">
-                      <div className="flex justify-between items-start mb-4">
-                        <h3 className="text-xl font-semibold text-gray-900 group-hover:text-bitcoin-orange transition-colors duration-300">
-                          {type.title}
-                        </h3>
-                        <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-bitcoin-orange transition-colors duration-300" />
-                      </div>
-                      <p className="text-gray-600 mb-4 leading-relaxed">
-                        {type.description}
-                      </p>
-                      <div className="flex flex-wrap gap-3">
-                        <Badge variant="secondary" className="bg-swiss-blue/10 text-swiss-blue hover:bg-swiss-blue/20">
-                          {type.duration}
-                        </Badge>
-                        <Badge variant="secondary" className="bg-gray-100 text-gray-700">
-                          {type.format}
-                        </Badge>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-swiss-blue/10 rounded-full flex items-center justify-center">
+                  <span className="text-2xl">🔬</span>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Independent Research</h3>
+                <p className="text-gray-600 text-sm">
+                  Evidence-based analysis free from commercial interests or institutional biases.
+                </p>
               </div>
 
-              <div className="mt-8 p-6 bg-gradient-to-br from-bitcoin-orange/5 to-bitcoin-orange/10 rounded-3xl border border-bitcoin-orange/20">
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-swiss-blue/10 rounded-full flex items-center justify-center">
+                  <span className="text-2xl">🎯</span>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Practical Focus</h3>
+                <p className="text-gray-600 text-sm">
+                  Strategic insights that translate complex Bitcoin concepts into actionable business decisions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Ways to Engage */}
+      <section className="swiss-section bg-white">
+        <div className="swiss-grid">
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center mb-6">
+              <div className="swiss-blue-gradient-accent mx-auto"></div>
+            </div>
+            <h2>Ways to Engage</h2>
+            <p className="swiss-prose max-w-3xl mx-auto text-gray-600 mt-4">
+              Explore our different service offerings and find the right fit for your needs.
+                </p>
+              </div>
+              
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
+            {engagementTypes.map((type, index) => (
+              <div 
+                key={index} 
+                className="card-general card-gradient-hover group"
+              >
+                <div className="relative z-10">
+                  {/* Icon with gradient background */}
+                  <div className="mb-6 flex items-center justify-center w-16 h-16 rounded-2xl swiss-blue-gradient-subtle shadow-sm mx-auto">
+                    <span className="text-3xl">{type.icon}</span>
+                  </div>
+                  
+                  {/* Title */}
+                  <h3 className="text-2xl font-semibold mb-4 text-gray-900 text-center">
+                    {type.title}
+                  </h3>
+                  
+                  {/* Description */}
+                  <p className="text-gray-600 leading-relaxed mb-6 text-base text-center">
+                    {type.description}
+                  </p>
+                  
+                  {/* CTAs */}
+                  <div className="space-y-3">
+                    <CTAButton 
+                      variant="primary" 
+                      size="lg" 
+                      href={type.primaryCta.link} 
+                      className="w-full"
+                    >
+                      {type.primaryCta.text}
+                    </CTAButton>
+                    <CTAButton 
+                      variant="secondary" 
+                      size="lg" 
+                      href={type.secondaryCta.link} 
+                      className="w-full"
+                    >
+                      {type.secondaryCta.text}
+                    </CTAButton>
+                  </div>
+                </div>
+                </div>
+            ))}
+                </div>
+
+          {/* More to Come Card */}
+          <div className="max-w-4xl mx-auto mb-12">
+            <div className="card-general p-8 bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200">
+              <div className="text-center">
+                <h3 className="text-2xl font-semibold mb-3 text-gray-900">More to come in 2026!</h3>
+                <p className="text-gray-600 mb-6 text-base">
+                  We plan to expand our offering with much more. Stay tuned!
+                </p>
+                <CTAButton 
+                  variant="secondary" 
+                  size="lg" 
+                  href="/webinar"
+                  className="mx-auto"
+                >
+                  Tell me more
+                </CTAButton>
+              </div>
+                      </div>
+              </div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="p-6 bg-gradient-to-br from-swiss-blue/5 to-swiss-blue/10 rounded-2xl border border-swiss-blue/20">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">Need Something Custom?</h3>
                 <p className="text-gray-600 mb-4">
                   We also create tailored programs for specific organizational needs, from board presentations to multi-day immersions.
@@ -323,15 +325,15 @@ const Contact = () => {
                 <p className="text-sm text-gray-500">
                   Reach out to discuss your unique requirements.
                 </p>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="swiss-section bg-gray-900">
-        <div className="swiss-grid">
+      <section className="swiss-section bg-gray-900 text-white relative overflow-hidden">
+        <div className="absolute inset-0 cta-section-bg"></div>
+        <div className="swiss-grid relative">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl lg:text-4xl font-medium text-white mb-6">
               Ready to Get Started?
@@ -342,8 +344,8 @@ const Contact = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
-              <CTAButton variant="primary" size="lg" href="/briefing" showArrow>
-                Book Executive Briefing
+              <CTAButton variant="primary" size="lg" href="/inquiry?service=research" showArrow>
+                Book discovery call
               </CTAButton>
               <CTAButton variant="secondary" size="lg" href="/speaker" className="bg-white text-gray-900 hover:bg-gray-100">
                 Request Speaker

@@ -7,10 +7,16 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
 dist
 dist-ssr
 *.local
+
+# Build outputs
+.next
+out
+.vercel
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +28,19 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Deployment documentation (exclude from deployment repo)
+DEPLOYMENT.md
+DEPLOYMENT-CHECKLIST.md
+CMS-GUIDE.md
+DESIGN-SYSTEM.md
+feedback-v1.md
+deploy-static.sh
+
+# Cursor/IDE specific
+.cursor/
+
+# Environment files
+.env
+.env.local
+.env*.local

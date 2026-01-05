@@ -1,61 +1,21 @@
 ---
-id: "marcus-dapp"
-name: "Marcus Dapp"
-role: "Senior Bitcoin Analyst"
-bio: "Marcus Dapp is a senior Bitcoin analyst at Swiss Bitcoin Intelligence, specializing in macroeconomic analysis and institutional Bitcoin adoption strategies. He brings a unique perspective combining traditional economic analysis with deep Bitcoin technical knowledge."
-avatar: "/lovable-uploads/ae492e5e-45c5-4704-97ec-db1888a7c382.png"
+name: "Dr. Marcus M. Dapp"
+role: "Founder"
+bio: "Marcus brings over a decade of experience in research and teaching—both in academia and within 'Crypto Valley'—with a focus on Bitcoin, crypto, and monetary systems, exploring their economic, political, social, and ecological dimensions."
+avatar: "/sbi-core-team/Marcus_Dapp-SBI.png"
 social:
-  linkedin: "#"
-  twitter: "#"
-  email: "marcus@swissbitcoinintelligence.com"
-expertise:
-  - "Macroeconomic Analysis"
-  - "Bitcoin Protocol Development"
-  - "Institutional Strategy"
-  - "Risk Assessment"
-published: true
+  linkedin: "https://www.linkedin.com/in/marcusmdapp"
+  twitter: "https://x.com/DCentSociety"
 ---
 
-# Marcus Dapp
+## Why is Bitcoin interesting?
 
-Marcus Dapp serves as Senior Bitcoin Analyst at Swiss Bitcoin Intelligence, where he combines rigorous economic analysis with deep technical Bitcoin expertise to provide institutional clients with comprehensive strategic insights.
+Bitcoin represents a fundamental shift in how we think about money and power. Being permissionless is not just technically interesting; it's philosophically profound. Bitcoin is a living experiment in decentralized trust, and watching it unfold is both exciting and inspiring. The energy debate makes it even more interesting as it forces us to confront real questions about value, sustainability, and what we as a society are willing to spend resources on for future generations. It should be a strategic topic for anyone!
 
-## Professional Background
+## Expertise
 
-Marcus brings a unique blend of traditional economic analysis and cutting-edge Bitcoin research:
-- **Economic Research**: Advanced macroeconomic modeling and analysis
-- **Bitcoin Protocol**: Deep technical understanding of Bitcoin's underlying technology
-- **Institutional Analysis**: Strategic assessment of Bitcoin adoption for large organizations
-- **Risk Modeling**: Sophisticated frameworks for evaluating Bitcoin investment strategies
+Founder SBI. Background in computer science, technology management, and international relations from ETH Zürich. Researcher, lecturer, advisor.
 
-## Areas of Specialization
+## Favorite Quote
 
-### Macroeconomic Analysis
-- **Monetary Policy Impact**: How central bank policies affect Bitcoin adoption
-- **Inflation Hedging**: Bitcoin's role as a store of value in inflationary environments
-- **Currency Debasement**: Analysis of fiat currency risks and Bitcoin alternatives
-- **Global Economic Trends**: International factors driving institutional Bitcoin interest
-
-### Institutional Strategy
-- **Treasury Allocation**: Optimal Bitcoin allocation strategies for corporate treasuries
-- **Implementation Frameworks**: Step-by-step adoption roadmaps for institutions
-- **Risk Management**: Comprehensive risk assessment and mitigation strategies
-- **Performance Metrics**: Evaluation criteria for institutional Bitcoin investments
-
-## Research Contributions
-
-Marcus regularly contributes to Swiss Bitcoin Intelligence's research output:
-- **Market Analysis Reports**: In-depth examination of Bitcoin market dynamics
-- **Institutional Case Studies**: Analysis of successful corporate Bitcoin adoption
-- **Regulatory Impact Assessments**: Evaluation of policy changes on Bitcoin adoption
-- **Strategic Planning Guides**: Frameworks for institutional Bitcoin implementation
-
-## Education and Advisory
-
-Beyond research, Marcus provides:
-- **Executive Briefings**: Customized presentations for C-suite leaders
-- **Board Education**: Comprehensive Bitcoin education for board members
-- **Strategic Consulting**: One-on-one advisory for institutional Bitcoin strategies
-- **Market Intelligence**: Regular updates on Bitcoin market developments
-
-Marcus is committed to helping Swiss institutions navigate the complex landscape of Bitcoin adoption with confidence and strategic clarity.
+"You never change things by fighting the existing reality. To change something, build a new model that makes the existing model obsolete." –Buckminster Fuller

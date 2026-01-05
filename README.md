@@ -1,73 +1,105 @@
-# Welcome to your Lovable project
+# SBI Site - Strategic Bitcoin Intelligence
 
-## Project info
+A Next.js website for the Swiss Bitcoin Institute, providing strategic Bitcoin intelligence for business leaders and executives.
 
-**URL**: https://lovable.dev/projects/0590d3ac-2662-4c1f-9e6c-befad994b1b3
+## Getting Started
 
-## How can I edit this code?
+First, install the dependencies:
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/0590d3ac-2662-4c1f-9e6c-befad994b1b3) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+npm install
+# or
+yarn install
+# or
+bun install
 ```
 
-**Edit a file directly in GitHub**
+Then, run the development server:
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+npm run dev
+# or
+yarn dev
+# or
+bun dev
+```
 
-**Use GitHub Codespaces**
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Content Management System
 
-## What technologies are used for this project?
+The SBI site uses a **file-based CMS** where content is managed through markdown files. This provides version control, automatic deployment, and team collaboration through GitHub.
 
-This project is built with:
+### Quick Start - Adding Content
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+#### Create a New Article
+```bash
+npm run new:article "Article Title" author-id
 
-## How can I deploy this project?
+# Example:
+npm run new:article "Bitcoin Mining in Switzerland" marcus-dapp
+```
 
-Simply open [Lovable](https://lovable.dev/projects/0590d3ac-2662-4c1f-9e6c-befad994b1b3) and click on Share -> Publish.
+#### Create a New Author
+```bash
+npm run new:author "Full Name" "Role" "email@example.com"
 
-## Can I connect a custom domain to my Lovable project?
+# Example:
+npm run new:author "Jane Doe" "Senior Researcher" "jane@example.com"
+```
 
-Yes, you can!
+### Content Structure
+- **Articles**: `src/content/articles/` - Research articles and blog posts
+- **Authors**: `src/content/authors/` - Author profiles and bios
+- **Templates**: `templates/` - Templates for new content
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Publishing Workflow
+1. Create content with `published: false`
+2. Test locally with `npm run dev`
+3. Set `published: true` when ready
+4. Push to GitHub for automatic deployment
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+For detailed instructions, see [CMS-GUIDE.md](./CMS-GUIDE.md).
+
+## Project Structure
+
+- `src/app/` - Next.js app directory with routing
+- `src/components/` - Reusable UI components
+- `src/pages/` - Page components
+- `src/content/` - Content files (articles, authors)
+- `src/lib/` - Utility functions and configurations
+
+## Features
+
+- **Strategic Intelligence**: Research and analysis on Bitcoin adoption
+- **Executive Education**: Programs for business leaders
+- **Team Expertise**: World-class Bitcoin researchers and practitioners
+- **Modern UI**: Built with Next.js, TypeScript, and Tailwind CSS
+
+## Build
+
+```bash
+npm run build
+# or
+yarn build
+# or
+bun build
+```
+
+## Start Production Server
+
+```bash
+npm start
+# or
+yarn start
+# or
+bun start
+```
+
+## Technologies Used
+
+- **Framework**: Next.js 14
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: Radix UI + shadcn/ui
+- **Content**: Markdown with gray-matter

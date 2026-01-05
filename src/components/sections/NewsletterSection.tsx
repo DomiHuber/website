@@ -1,74 +1,69 @@
+"use client";
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Mail } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 
 const NewsletterSection = () => {
   const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-
-    setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
     
     toast({
-      title: "Subscription confirmed",
-      description: "You'll receive the Intelligence Brief twice monthly.",
+      title: "Successfully subscribed!",
+      description: "You'll receive our latest Bitcoin intelligence reports.",
     });
     
     setEmail('');
-    setIsSubmitting(false);
   };
 
   return (
-    <section className="bg-gray-50 swiss-section">
+    <section id="newsletter" className="swiss-section bg-white">
       <div className="swiss-grid">
-        <div className="max-w-2xl mx-auto text-center">
-          <div className="flex justify-center mb-6">
-            <div className="w-12 h-12 bg-bitcoin-orange rounded-lg flex items-center justify-center">
-              <Mail className="h-6 w-6 text-white" />
-            </div>
+        <div className="max-w-4xl mx-auto">
+          <Card className="border-2 border-swiss-blue/20 shadow-xl">
+            <CardContent className="p-12 text-center">
+              <div className="w-20 h-20 mx-auto mb-8 bg-gradient-to-br from-swiss-blue/20 to-swiss-blue/10 rounded-full flex items-center justify-center">
+                <span className="text-4xl">📧</span>
           </div>
           
-          <h2 className="text-3xl lg:text-4xl font-medium text-gray-900 mb-4">
-            The Intelligence Brief
+              <h2 className="text-3xl font-semibold mb-6 text-gray-900">
+                Stay Ahead with Bitcoin Intelligence
           </h2>
           
-          <p className="text-lg text-gray-600 mb-8 max-w-xl mx-auto">
-            Twice-monthly, executive-ready insights on Bitcoin's strategic implications for Switzerland. 
-            Unsubscribe anytime.
+              <p className="swiss-prose-lg mb-8 text-gray-600 max-w-2xl mx-auto">
+                Strategic Bitcoin insights directly to your mailbox. Twice a month. Unsubscribe anytime.
           </p>
           
           <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-            <div className="flex space-x-3">
+                <div className="flex gap-4">
               <Input
                 type="email"
-                placeholder="Enter your email"
+                    placeholder="your.email@company.com" 
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="flex-1"
+                    onChange={e => setEmail(e.target.value)} 
                 required
+                    className="h-12 flex-1" 
               />
               <Button 
                 type="submit" 
-                disabled={isSubmitting}
-                className="bg-bitcoin-orange hover:bg-bitcoin-orange-hover text-white"
+                    className="h-12 px-8 swiss-blue-gradient swiss-blue-gradient-hover text-white whitespace-nowrap"
               >
-                {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+                    Subscribe to Intelligence Brief
               </Button>
             </div>
           </form>
           
           <p className="text-sm text-gray-500 mt-4">
-            No spam. Executive-focused content only.
+                Join our growing community of Bitcoin intelligence subscribers
           </p>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>

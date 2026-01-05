@@ -1,49 +1,25 @@
 ---
-id: "yves-andre-graf"
-name: "Yves André Graf"
-role: "Founder & Managing Director"
-bio: "Yves André Graf is the founder and managing director of Swiss Bitcoin Intelligence. With over 15 years of experience in traditional finance and three years dedicated to Bitcoin research, he specializes in helping Swiss executives and institutions understand and implement Bitcoin strategies."
-avatar: "/lovable-uploads/756bfacf-159c-4ae9-b55f-a492ee8c8de5.png"
+name: "Yves-André Graf"
+role: "Research Fellow"
+bio: "Yves combines over ten years of experience in both traditional banking and the crypto space. As a committed Bitcoin maximalist for more than six years, he has developed a deep expertise in Bitcoin Treasury Strategy—now the central pillar of his strategic work."
+avatar: "/team/yves-andre-graf.png"
 social:
   linkedin: "#"
   twitter: "#"
-  email: "yves@swissbitcoinintelligence.com"
-expertise:
-  - "Bitcoin Treasury Strategy"
-  - "Institutional Adoption"
-  - "Swiss Financial Regulation"
-  - "Executive Education"
-published: true
 ---
 
-# Yves André Graf
+# Yves-André Graf
 
-Yves André Graf is the visionary founder and managing director of Swiss Bitcoin Intelligence, bringing together his extensive background in traditional Swiss finance with cutting-edge Bitcoin expertise.
+Yves combines over ten years of experience in both traditional banking and the crypto space. As a committed Bitcoin maximalist for more than six years, he has developed a deep expertise in Bitcoin Treasury Strategy—now the central pillar of his strategic work.
 
-## Professional Background
+## Why is Bitcoin interesting?
 
-With over 15 years of experience in Switzerland's traditional financial sector, Yves has developed deep expertise in:
-- **Treasury Management**: Advanced strategies for institutional asset allocation
-- **Risk Assessment**: Comprehensive frameworks for evaluating new asset classes
-- **Regulatory Compliance**: Navigation of Swiss financial regulations and requirements
-- **Executive Advisory**: C-suite consulting on strategic financial decisions
+Bitcoin is more than just money or a means of communication — it is a philosophy.
 
-## Bitcoin Specialization
+I believe it has the power to transform not only how we think about finance and information exchange, but also how we approach work, time, and the very structure of our daily lives. Bitcoin represents a fundamental shift, one that could usher in the next evolution of human society.
 
-Since 2021, Yves has dedicated his career to Bitcoin research and institutional adoption, focusing on:
-- **Corporate Treasury Integration**: Helping companies implement Bitcoin treasury strategies
-- **Executive Education**: Training programs for C-suite leaders and board members
-- **Regulatory Analysis**: Interpreting Swiss cryptocurrency regulations for institutional clients
-- **Strategic Planning**: Long-term Bitcoin adoption roadmaps for organizations
+## Expertise
 
-## Thought Leadership
+Senior Custody Specialist at Bitcoin Suisse, Co-host of the One Chair Podcast
 
-Yves is recognized as a leading voice in Swiss Bitcoin adoption, regularly contributing to:
-- Industry conferences and executive briefings
-- Financial media and publication interviews
-- Policy discussions with regulatory bodies
-- Academic and research collaborations
-
-## Mission
-
-Through Swiss Bitcoin Intelligence, Yves is committed to bridging the gap between traditional Swiss finance and the digital asset revolution, ensuring that Swiss institutions and executives are prepared to lead in the evolving financial landscape.
+MSc in Finance, Accounting and Controlling, BSc in Chemistry

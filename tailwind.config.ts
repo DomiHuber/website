@@ -3,9 +3,9 @@ import type { Config } from "tailwindcss";
 export default {
 	darkMode: ["class"],
 	content: [
-		"./pages/**/*.{ts,tsx}",
-		"./components/**/*.{ts,tsx}",
-		"./app/**/*.{ts,tsx}",
+		"./src/pages/**/*.{ts,tsx}",
+		"./src/components/**/*.{ts,tsx}",
+		"./src/app/**/*.{ts,tsx}",
 		"./src/**/*.{ts,tsx}",
 	],
 	prefix: "",
@@ -19,7 +19,14 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'inter': ['Inter', 'sans-serif'],
+				'sans': ['var(--font-open-sans)', 'system-ui', 'sans-serif'],
+			},
+			fontWeight: {
+				'light': '300',
+				'normal': '400',
+				'semibold': '600',
+				'bold': '700',
+				'extrabold': '800',
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -43,6 +50,16 @@ export default {
 					DEFAULT: 'hsl(var(--swiss-blue))',
 					hover: 'hsl(var(--swiss-blue-hover))',
 					light: 'hsl(var(--swiss-blue-light))',
+				},
+				'swiss-red': {
+					DEFAULT: 'hsl(var(--swiss-red))',
+					hover: 'hsl(var(--swiss-red-hover))',
+					light: 'hsl(var(--swiss-red-light))',
+				},
+				// Gradient colors (for use in Tailwind classes)
+				'gradient-blue': {
+					start: '#abc2cc',
+					end: '#00abfb',
 				},
 				gray: {
 					50: 'hsl(var(--gray-50))',

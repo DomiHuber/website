@@ -1,14 +1,19 @@
+"use client";
+
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { getArticleBySlug, getAuthorById, Article, Author } from '@/lib/content';
+import { fetchArticle, fetchAuthor, Article, Author } from '@/lib/content-client';
 import ArticleContent from '@/components/articles/ArticleContent';
 import { useToast } from '@/hooks/use-toast';
 
-const ArticlePage = () => {
-  const { slug } = useParams<{ slug: string }>();
+interface ArticlePageProps {
+  slug: string;
+}
+
+const ArticlePage = ({ slug }: ArticlePageProps) => {
   const { toast } = useToast();
   const [article, setArticle] = useState<Article | null>(null);
   const [author, setAuthor] = useState<Author | null>(null);
@@ -19,10 +24,10 @@ const ArticlePage = () => {
       if (!slug) return;
       
       try {
-        const articleData = await getArticleBySlug(slug);
+        const articleData = await fetchArticle(slug);
         if (articleData) {
           setArticle(articleData);
-          const authorData = await getAuthorById(articleData.author);
+          const authorData = await fetchAuthor(articleData.author);
           setAuthor(authorData);
         } else {
           toast({
@@ -64,9 +69,9 @@ const ArticlePage = () => {
           <h1 className="text-2xl font-bold mb-4">Article Not Found</h1>
           <p className="text-muted-foreground mb-6">The requested article could not be found.</p>
           <Button asChild>
-            <Link to="/intelligence">
+            <Link href="/research">
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Intelligence
+              Back to Research
             </Link>
           </Button>
         </div>
@@ -81,9 +86,9 @@ const ArticlePage = () => {
         <div className="swiss-grid">
           <div className="flex items-center justify-between">
             <Button variant="ghost" asChild>
-              <Link to="/intelligence" className="flex items-center gap-2">
+              <Link href="/research" className="flex items-center gap-2">
                 <ArrowLeft className="w-4 h-4" />
-                Back to Intelligence
+                Back to Research
               </Link>
             </Button>
             
@@ -99,7 +104,7 @@ const ArticlePage = () => {
       {/* Article Content */}
       <div className="swiss-section">
         <div className="swiss-grid">
-          <ArticleContent article={article} author={author} />
+          <ArticleContent article={article} author={author || undefined} />
         </div>
       </div>
 
@@ -141,12 +146,12 @@ const ArticlePage = () => {
       <div className="swiss-section bg-background">
         <div className="swiss-grid">
           <div className="max-w-4xl mx-auto text-center">
-            <h3 className="text-2xl font-semibold mb-4">Explore More Intelligence</h3>
+            <h3 className="text-2xl font-semibold mb-4">Explore More Research</h3>
             <p className="text-muted-foreground mb-6">
               Discover more strategic insights and analysis from our research team.
             </p>
             <Button asChild size="lg">
-              <Link to="/intelligence">
+              <Link href="/research">
                 View All Reports
               </Link>
             </Button>
