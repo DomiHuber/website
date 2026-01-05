@@ -107,8 +107,13 @@
 
 # Old page redirects
 [[redirects]]
+  from = "/meet-the-team"
+  to = "/team"
+  status = 301
+
+[[redirects]]
   from = "/meet-the-team/"
-  to = "/meet-the-team"
+  to = "/team"
   status = 301
 
 [[redirects]]
@@ -119,6 +124,12 @@
 [[redirects]]
   from = "/switzerland-bitcoin-values"
   to = "/switzerland-bitcoin"
+  status = 301
+
+# Redirect old meet-the-team routes to new /team routes
+[[redirects]]
+  from = "/meet-the-team/:slug"
+  to = "/team/:slug"
   status = 301
 
 # Note: API routes are automatically handled by @netlify/plugin-nextjs

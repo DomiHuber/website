@@ -125,7 +125,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const coreTeamPages = teamMembers
     .filter(member => member.category === 'core')
     .map((member) => ({
-      url: `${baseUrl}/meet-the-team/${member.slug}`,
+      url: `${baseUrl}/team/${member.slug}`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.6,

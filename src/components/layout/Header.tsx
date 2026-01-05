@@ -32,7 +32,7 @@ const Header = () => {
       name: 'About',
       href: '/switzerland-bitcoin',
       dropdown: [
-        { name: 'Meet the Team', href: '/meet-the-team' },
+        { name: 'Meet the Team', href: '/team' },
         { name: 'Switzerland & Bitcoin', href: '/switzerland-bitcoin' },
         { name: 'Why Bitcoin', href: '/why-bitcoin' },
         { name: 'Fellowship', href: '/fellows' },

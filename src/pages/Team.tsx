@@ -48,7 +48,7 @@ const Team = () => {
             {coreTeam.map((member, index) => (
               <Link 
                 key={member.slug} 
-                href={`/meet-the-team/${member.slug}`}
+                href={`/team/${member.slug}`}
                 className="group text-center block"
               >
                 <div className="relative mb-8">
