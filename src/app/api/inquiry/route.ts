@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { SERVICE_LABELS, SERVICE_EMAIL_CONTENT, type ServiceType } from '@/lib/inquiry';
+import { FROM_EMAIL, RECEIVE_EMAIL_NOTIFICATIONS } from '@/lib/emails';
 
 const resend = new Resend(process.env.RESEND_API_KEY!);
 
@@ -118,8 +119,8 @@ Submitted: ${new Date().toLocaleString('en-CH', { timeZone: 'Europe/Zurich' })} 
   `.trim();
 
   await resend.emails.send({
-    from: 'Swiss Bitcoin Institute <noreply@notifications.bitcoininstitute.ch>',
-    to: 'hello@bitcoininstitute.ch',
+    from: FROM_EMAIL,
+    to: RECEIVE_EMAIL_NOTIFICATIONS,
     subject: `[${score >= 70 ? 'HIGH' : score >= 40 ? 'MED' : 'STD'}] New ${serviceLabel} from ${formData.name || formData.email}`,
     text,
   });
@@ -148,7 +149,7 @@ https://bitcoininstitute.ch
   `.trim();
 
   await resend.emails.send({
-    from: 'Swiss Bitcoin Institute <noreply@notifications.bitcoininstitute.ch>',
+    from: FROM_EMAIL,
     to: email,
     subject: `${content.title} - Swiss Bitcoin Institute`,
     text,
