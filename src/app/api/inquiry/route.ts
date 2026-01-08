@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { type ServiceType } from '@/lib/inquiry';
+import { supabaseAdmin } from '@/lib/supabase';
 import {
   FROM_EMAIL,
   RECEIVE_EMAIL_NOTIFICATIONS,
@@ -27,6 +28,23 @@ export async function POST(request: Request) {
       organization: formData.organization,
       timestamp: new Date().toISOString(),
     });
+
+    // Save the inquiry to the database
+    const { error: dbError } = await supabaseAdmin
+      .from('inquiries')
+      .insert({
+        service_type: serviceType,
+        name: formData.name,
+        email: formData.email,
+        organization: formData.organization || null,
+        score,
+        form_data: formData,
+      });
+
+    if (dbError) {
+      console.error('Database save error:', dbError);
+      // Continue with email sending even if DB fails
+    }
     
     // Send notification email to SBI team
     const teamEmail = getInquiryTeamNotificationEmail({ formData, serviceType, score });
