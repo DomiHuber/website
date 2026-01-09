@@ -7,34 +7,51 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 
+interface CourseOption {
+  id: string;
+  label: string;
+}
+
 interface CourseSignupFormProps {
   courseName: string;
   courseSlug: string;
   courseDate?: string;
+  courseOptions?: CourseOption[];
 }
 
-export default function CourseSignupForm({ courseName, courseSlug, courseDate }: CourseSignupFormProps) {
+export default function CourseSignupForm({ courseName, courseSlug, courseDate, courseOptions }: CourseSignupFormProps) {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Determine the initial course date value
+  const getInitialCourseDate = () => {
+    if (courseOptions && courseOptions.length > 0) {
+      return courseOptions[0].label;
+    }
+    return courseDate || '';
+  };
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     organization: '',
-    courseDate: courseDate || '',
+    courseDate: getInitialCourseDate(),
     message: '',
   });
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const hasCourseSelection = courseOptions || courseDate;
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name || !formData.email || (courseDate && !formData.courseDate)) {
+    if (!formData.name || !formData.email || (hasCourseSelection && !formData.courseDate)) {
       toast({
         title: "Please fill in required fields",
         description: "Name, email, and course date are required.",
@@ -70,7 +87,7 @@ export default function CourseSignupForm({ courseName, courseSlug, courseDate }:
           email: '',
           phone: '',
           organization: '',
-          courseDate: courseDate || '',
+          courseDate: getInitialCourseDate(),
           message: '',
         });
       } else {
@@ -149,18 +166,35 @@ export default function CourseSignupForm({ courseName, courseSlug, courseDate }:
         </div>
       </div>
 
-      {courseDate && (
+      {hasCourseSelection && (
         <div>
           <Label htmlFor="courseDate">Course Date *</Label>
-          <Input
-            id="courseDate"
-            name="courseDate"
-            type="text"
-            required
-            value={formData.courseDate}
-            readOnly
-            className="mt-1 bg-gray-50 cursor-not-allowed border-gray-300 text-gray-700"
-          />
+          {courseOptions && courseOptions.length > 1 ? (
+            <select
+              id="courseDate"
+              name="courseDate"
+              required
+              value={formData.courseDate}
+              onChange={handleInputChange}
+              className="mt-1 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+            >
+              {courseOptions.map((option) => (
+                <option key={option.id} value={option.label}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <Input
+              id="courseDate"
+              name="courseDate"
+              type="text"
+              required
+              value={formData.courseDate}
+              readOnly
+              className="mt-1 bg-gray-50 cursor-not-allowed border-gray-300 text-gray-700"
+            />
+          )}
         </div>
       )}
 
