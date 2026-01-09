@@ -67,8 +67,9 @@ export default function CourseSignupForm({ courseName, courseSlug, courseDate, c
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          serviceType: 'courses',
+          serviceType: 'scheduled-course',
           selectedCourses: [courseSlug],
+          courseName,
           ...formData,
         }),
       });
