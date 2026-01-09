@@ -4,16 +4,16 @@ import { useState, useEffect } from 'react';
 import { X, Mail, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useToast } from '@/hooks/use-toast';
+import { useNewsletterSubscription, isAlreadySubscribed } from '@/hooks/use-newsletter';
 
 export default function NewsletterPopup() {
   const [isOpen, setIsOpen] = useState(false);
-  const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubscribed, setIsSubscribed] = useState(false);
-  const { toast } = useToast();
+  const { email, setEmail, isSubmitting, isSubscribed, subscribe } = useNewsletterSubscription();
 
   useEffect(() => {
+    // Don't show popup if user has already subscribed
+    if (isAlreadySubscribed()) return;
+
     // Check if user has seen the popup before
     const popupShown = localStorage.getItem('newsletter-popup-shown');
     
@@ -27,52 +27,6 @@ export default function NewsletterPopup() {
       return () => clearTimeout(timer);
     }
   }, []);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!email || !email.includes('@')) {
-      toast({
-        title: "Please enter a valid email",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const response = await fetch('/api/newsletter/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        setIsSubscribed(true);
-        setEmail('');
-      } else {
-        toast({
-          title: "Subscription failed",
-          description: data.error || "Please try again later or contact us directly.",
-          variant: "destructive",
-        });
-      }
-    } catch (error) {
-      console.error('Newsletter subscription error:', error);
-      toast({
-        title: "Subscription failed",
-        description: "Please try again later or contact us directly.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   if (!isOpen) return null;
 
@@ -139,7 +93,7 @@ export default function NewsletterPopup() {
                 </div>
 
                 {/* Email Form */}
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={subscribe} className="space-y-4">
                   <Input
                     type="email"
                     placeholder="your.email@company.com"

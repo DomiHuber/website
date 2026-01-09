@@ -1,62 +1,13 @@
 "use client";
 
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
-import { useToast } from '@/hooks/use-toast';
 import { CheckCircle2 } from 'lucide-react';
+import { useNewsletterSubscription } from '@/hooks/use-newsletter';
 
 const NewsletterSection = () => {
-  const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubscribed, setIsSubscribed] = useState(false);
-  const { toast } = useToast();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || !email.includes('@')) {
-      toast({
-        title: "Please enter a valid email",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const response = await fetch('/api/newsletter/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        setIsSubscribed(true);
-        setEmail('');
-      } else {
-        toast({
-          title: "Subscription failed",
-          description: data.error || "Please try again later or contact us directly.",
-          variant: "destructive",
-        });
-      }
-    } catch (error) {
-      console.error('Newsletter subscription error:', error);
-      toast({
-        title: "Subscription failed",
-        description: "Please try again later or contact us directly.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const { email, setEmail, isSubmitting, isSubscribed, subscribe } = useNewsletterSubscription();
 
   return (
     <section id="newsletter" className="swiss-section bg-white">
@@ -94,7 +45,7 @@ const NewsletterSection = () => {
                     Strategic Bitcoin insights directly to your mailbox. Twice a month. Unsubscribe anytime.
                   </p>
                   
-                  <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+                  <form onSubmit={subscribe} className="max-w-md mx-auto">
                     <div className="flex flex-col sm:flex-row gap-4">
                       <Input
                         type="email"
