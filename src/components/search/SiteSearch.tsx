@@ -169,7 +169,7 @@ export function SiteSearch() {
           <CommandSeparator />
           
           <CommandGroup heading="Quick Actions">
-            <CommandItem onSelect={() => runCommand(() => router.push('/inquiry?service=research&discovery=true'))}>
+            <CommandItem onSelect={() => runCommand(() => router.push('/inquiry?service=research&discovery=true#service-selection'))}>
               <User className="mr-2 h-4 w-4" />
               <span>Get Started</span>
             </CommandItem>

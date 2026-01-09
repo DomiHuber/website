@@ -84,21 +84,28 @@ export default function LeadIntakeForm() {
   const handleDiscoveryCallClick = () => {
     setIsDiscoveryCallSelected(true);
     setServiceType('research');
-    // Scroll to top of page
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Don't scroll - let user stay where they are
   };
 
-  // Auto-scroll to top of page if URL has discovery=true parameter
+  // Scroll to service selection section when coming from external links with URL params or hash
   useEffect(() => {
-    if (urlDiscovery && (serviceType === 'research' || urlService === 'research')) {
-      // Ensure serviceType is set to research if URL has it
-      if (urlService === 'research') {
-        setServiceType('research');
-      }
-      // Scroll to top of page
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Check if URL has hash anchor or URL params
+    const hasHash = typeof window !== 'undefined' && window.location.hash === '#service-selection';
+    const hasUrlParams = urlService || urlDiscovery || urlCourse;
+    
+    if (hasHash || hasUrlParams) {
+      setTimeout(() => {
+        const serviceSelection = document.getElementById('service-selection');
+        if (serviceSelection) {
+          const rect = serviceSelection.getBoundingClientRect();
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          const targetY = scrollTop + rect.top - 100; // 100px offset for header
+          window.scrollTo({ top: targetY, behavior: 'smooth' });
+        }
+      }, 150); // Slightly longer delay to ensure DOM is ready
     }
-  }, [urlDiscovery, serviceType, urlService]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array - only run once on mount
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -108,7 +115,11 @@ export default function LeadIntakeForm() {
       const response = await fetch('/api/inquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ serviceType, ...formData }),
+        body: JSON.stringify({ 
+          serviceType, 
+          isDiscoveryCall: isDiscoveryCallSelected && serviceType === 'research',
+          ...formData 
+        }),
       });
       
       const data = await response.json();
@@ -158,9 +169,13 @@ export default function LeadIntakeForm() {
   };
 
   const getConfirmationMessage = () => {
+    if (isDiscoveryCallSelected && serviceType === 'research') {
+      return "We'll review your discovery call request and get back to you within 24 hours to schedule your 20-minute call.";
+    }
+    
     switch (serviceType) {
       case 'research':
-        return "We'll review your inquiry and get back to you within 24 hours to schedule a discovery call.";
+        return "We'll review your research inquiry and get back to you within 24 hours to discuss your intelligence needs.";
       case 'speaking':
         return "We'll review your event details and respond within 24 hours.";
       case 'courses':
@@ -209,7 +224,7 @@ export default function LeadIntakeForm() {
     <div className="max-w-4xl mx-auto">
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Service Type Selection */}
-        <Card className="p-8">
+        <Card id="service-selection" className="p-8 scroll-mt-24">
           <h3 className="text-2xl font-semibold text-gray-900 mb-6">
             What are you interested in?
           </h3>
@@ -219,19 +234,19 @@ export default function LeadIntakeForm() {
             id="discovery-call-button"
             type="button"
             onClick={handleDiscoveryCallClick}
-            className={`w-full p-6 rounded-xl border-2 transition-all mb-6 ${
+            className={`w-full p-6 rounded-xl border-2 transition-all mb-6 group ${
               isDiscoveryCallSelected && serviceType === 'research'
                 ? 'border-swiss-blue bg-swiss-blue/5 shadow-lg'
                 : 'border-gray-200 hover:border-swiss-blue/50 hover:shadow-md bg-white'
             }`}
           >
             <div className="flex items-center justify-center gap-3">
-              <Calendar className={`w-6 h-6 ${
+              <Calendar className={`w-6 h-6 transition-colors ${
                 isDiscoveryCallSelected && serviceType === 'research'
-                  ? 'swiss-blue-gradient-text'
-                  : 'text-gray-400'
+                  ? 'text-swiss-blue'
+                  : 'text-gray-400 group-hover:text-swiss-blue'
               }`} />
-              <span className={`text-lg font-semibold ${
+              <span className={`text-lg font-semibold transition-colors ${
                 isDiscoveryCallSelected && serviceType === 'research'
                   ? 'swiss-blue-gradient-text'
                   : 'text-gray-900'
@@ -251,14 +266,14 @@ export default function LeadIntakeForm() {
                 setServiceType('research');
                 setIsDiscoveryCallSelected(false);
               }}
-              className={`p-6 rounded-xl border-2 transition-all ${
+              className={`p-6 rounded-xl border-2 transition-all cursor-pointer ${
                 serviceType === 'research' && !isDiscoveryCallSelected
                   ? 'border-swiss-blue bg-swiss-blue/5'
-                  : 'border-gray-200 hover:border-gray-300'
+                  : 'border-gray-200 hover:border-swiss-blue/50 hover:bg-gray-50'
               }`}
             >
-              <Briefcase className={`w-8 h-8 mx-auto mb-3 ${
-                serviceType === 'research' ? 'text-swiss-blue' : 'text-gray-400'
+              <Briefcase className={`w-8 h-8 mx-auto mb-3 transition-colors ${
+                serviceType === 'research' && !isDiscoveryCallSelected ? 'text-swiss-blue' : 'text-gray-400'
               }`} />
               <div className="font-semibold text-gray-900">Research Brief</div>
               <div className="text-sm text-gray-600 mt-1">Intelligence & Analysis</div>
@@ -270,14 +285,14 @@ export default function LeadIntakeForm() {
                 setServiceType('speaking');
                 setIsDiscoveryCallSelected(false);
               }}
-              className={`p-6 rounded-xl border-2 transition-all ${
-                serviceType === 'speaking'
+              className={`p-6 rounded-xl border-2 transition-all cursor-pointer ${
+                serviceType === 'speaking' && !isDiscoveryCallSelected
                   ? 'border-swiss-blue bg-swiss-blue/5'
-                  : 'border-gray-200 hover:border-gray-300'
+                  : 'border-gray-200 hover:border-swiss-blue/50 hover:bg-gray-50'
               }`}
             >
-              <Mic className={`w-8 h-8 mx-auto mb-3 ${
-                serviceType === 'speaking' ? 'text-swiss-blue' : 'text-gray-400'
+              <Mic className={`w-8 h-8 mx-auto mb-3 transition-colors ${
+                serviceType === 'speaking' && !isDiscoveryCallSelected ? 'text-swiss-blue' : 'text-gray-400'
               }`} />
               <div className="font-semibold text-gray-900">Speaking</div>
               <div className="text-sm text-gray-600 mt-1">Keynotes & Events</div>
@@ -289,14 +304,14 @@ export default function LeadIntakeForm() {
                 setServiceType('courses');
                 setIsDiscoveryCallSelected(false);
               }}
-              className={`p-6 rounded-xl border-2 transition-all ${
-                serviceType === 'courses'
+              className={`p-6 rounded-xl border-2 transition-all cursor-pointer ${
+                serviceType === 'courses' && !isDiscoveryCallSelected
                   ? 'border-swiss-blue bg-swiss-blue/5'
-                  : 'border-gray-200 hover:border-gray-300'
+                  : 'border-gray-200 hover:border-swiss-blue/50 hover:bg-gray-50'
               }`}
             >
-              <GraduationCap className={`w-8 h-8 mx-auto mb-3 ${
-                serviceType === 'courses' ? 'text-swiss-blue' : 'text-gray-400'
+              <GraduationCap className={`w-8 h-8 mx-auto mb-3 transition-colors ${
+                serviceType === 'courses' && !isDiscoveryCallSelected ? 'text-swiss-blue' : 'text-gray-400'
               }`} />
               <div className="font-semibold text-gray-900">Courses</div>
               <div className="text-sm text-gray-600 mt-1">Education & Training</div>
@@ -379,11 +394,11 @@ export default function LeadIntakeForm() {
           </div>
         </Card>
 
-        {/* CONDITIONAL: Research/Intelligence Brief */}
-        {serviceType === 'research' && (
+        {/* CONDITIONAL: Open Discovery Call Form (Different from Research Brief) */}
+        {isDiscoveryCallSelected && serviceType === 'research' && (
           <Card id="discovery-form" className="p-8 border-2 border-swiss-blue/30">
             <div className="flex items-center space-x-3 mb-6">
-              <Calendar className="w-6 h-6 swiss-blue-gradient-text" />
+              <Calendar className="w-6 h-6 text-swiss-blue" />
               <h3 className="text-xl font-semibold text-gray-900">
                 Book Your 20-Minute Discovery Call
               </h3>
@@ -391,18 +406,8 @@ export default function LeadIntakeForm() {
             
             <div className="bg-swiss-blue/5 p-6 rounded-lg mb-6">
               <p className="text-gray-700 mb-4">
-                {isDiscoveryCallSelected 
-                  ? "We'll discuss your needs and determine how the Swiss Bitcoin Institute can best support your organization's Bitcoin strategy, education, or research requirements."
-                  : "We'll discuss your research or intelligence needs and determine the best approach for your organization."
-                }
+                We'll discuss your needs and determine how the Swiss Bitcoin Institute can best support your organization's Bitcoin strategy, education, or research requirements.
               </p>
-              {!isDiscoveryCallSelected && (
-                <ul className="space-y-2 text-sm text-gray-600">
-                  <li>• Custom research briefs and market analysis</li>
-                  <li>• Competitive intelligence and trend monitoring</li>
-                  <li>• Strategic Bitcoin intelligence for decision-makers</li>
-                </ul>
-              )}
             </div>
 
             <div className="space-y-6">
@@ -425,12 +430,7 @@ export default function LeadIntakeForm() {
               </div>
 
               <div>
-                <Label htmlFor="message">
-                  {isDiscoveryCallSelected 
-                    ? "What would you like to discuss? *"
-                    : "What questions do you need answered? *"
-                  }
-                </Label>
+                <Label htmlFor="message">What would you like to discuss? *</Label>
                 <Textarea
                   id="message"
                   name="message"
@@ -438,10 +438,64 @@ export default function LeadIntakeForm() {
                   onChange={handleInputChange}
                   required
                   rows={4}
-                  placeholder={isDiscoveryCallSelected 
-                    ? "Tell us about your organization's needs, goals, or questions related to Bitcoin strategy, education, or research..."
-                    : "Describe the strategic questions or intelligence needs you have..."
-                  }
+                  placeholder="Tell us about your organization's needs, goals, or questions related to Bitcoin strategy, education, or research..."
+                  className="mt-2"
+                />
+              </div>
+            </div>
+          </Card>
+        )}
+
+        {/* CONDITIONAL: Research Brief Form (Different from Discovery Call) */}
+        {serviceType === 'research' && !isDiscoveryCallSelected && (
+          <Card className="p-8 border-2 border-swiss-blue/30">
+            <div className="flex items-center space-x-3 mb-6">
+              <Briefcase className="w-6 h-6 text-swiss-blue" />
+              <h3 className="text-xl font-semibold text-gray-900">
+                Research & Intelligence Brief
+              </h3>
+            </div>
+            
+            <div className="bg-swiss-blue/5 p-6 rounded-lg mb-6">
+              <p className="text-gray-700 mb-4">
+                We'll discuss your research or intelligence needs and determine the best approach for your organization.
+              </p>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li>• Custom research briefs and market analysis</li>
+                <li>• Competitive intelligence and trend monitoring</li>
+                <li>• Strategic Bitcoin intelligence for decision-makers</li>
+              </ul>
+            </div>
+
+            <div className="space-y-6">
+              <div>
+                <Label htmlFor="timeline">Preferred Timeline</Label>
+                <Select 
+                  name="timeline" 
+                  onValueChange={(value) => handleSelectChange('timeline', value)}
+                >
+                  <SelectTrigger className="mt-2">
+                    <SelectValue placeholder="Select timeline" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="urgent">Urgent (within 1 week)</SelectItem>
+                    <SelectItem value="1-2weeks">1-2 weeks</SelectItem>
+                    <SelectItem value="1month">Within a month</SelectItem>
+                    <SelectItem value="flexible">Flexible</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <Label htmlFor="message">What questions do you need answered? *</Label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  required
+                  rows={4}
+                  placeholder="Describe the strategic questions or intelligence needs you have..."
                   className="mt-2"
                 />
               </div>

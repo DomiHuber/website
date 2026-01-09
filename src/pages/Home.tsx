@@ -43,19 +43,19 @@ const Home = () => {
     description: "From 1:1 bespoke sessions to more formal courses",
     icon: "🎓",
     primaryCta: { text: "Explore options", link: "/education" },
-    secondaryCta: { text: "Request Course Information", link: "/inquiry?service=courses" }
+    secondaryCta: { text: "Request Course Information", link: "/inquiry?service=courses#service-selection" }
   }, {
     title: "Research",
     description: "Actionable insights on Bitcoin's strategic implications",
     icon: "🧠",
     primaryCta: { text: "View offering", link: "/research" },
-    secondaryCta: { text: "Book Discovery Call", link: "/inquiry?service=research&discovery=true" }
+    secondaryCta: { text: "Book Discovery Call", link: "/inquiry?service=research&discovery=true#service-selection" }
   }, {
     title: "Speaking",
     description: "Keynotes that get the message across and encourage reflection",
     icon: "🎤",
     primaryCta: { text: "View talks", link: "/speaking" },
-    secondaryCta: { text: "Submit Speaking Request", link: "/inquiry?service=speaking" }
+    secondaryCta: { text: "Submit Speaking Request", link: "/inquiry?service=speaking#service-selection" }
   }];
   const researchHighlights = [{
     title: "Switzerland's Digital Currency Strategy",
@@ -98,7 +98,7 @@ const Home = () => {
               Executive education and independent research to navigate the transition to sound digital money.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
-              <CTAButton variant="primary" size="lg" href="/inquiry?service=research&discovery=true" className="shadow-2xl">
+              <CTAButton variant="primary" size="lg" href="/inquiry?service=research&discovery=true#service-selection" className="shadow-2xl">
                 Book Discovery Call
               </CTAButton>
               <Button
