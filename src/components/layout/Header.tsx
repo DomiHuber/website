@@ -114,7 +114,7 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-3">
             <SiteSearch />
             <Button variant="outline" size="sm" asChild>
-              <Link href="/inquiry">Get Started</Link>
+              <Link href="/inquiry?service=research&discovery=true">Get Started</Link>
             </Button>
             <Button variant="default" size="sm" asChild className="swiss-blue-gradient swiss-blue-gradient-hover text-white">
               <Link href="/contact">Contact</Link>
@@ -184,7 +184,7 @@ const Header = () => {
                   <SiteSearch />
                 </div>
                 <Button variant="outline" size="sm" className="w-full" asChild>
-                  <Link href="/inquiry">Get Started</Link>
+                  <Link href="/inquiry?service=research&discovery=true">Get Started</Link>
                 </Button>
                 <Button variant="default" size="sm" className="w-full swiss-blue-gradient swiss-blue-gradient-hover text-white" asChild>
                   <Link href="/contact">Contact</Link>

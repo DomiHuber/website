@@ -84,33 +84,21 @@ export default function LeadIntakeForm() {
   const handleDiscoveryCallClick = () => {
     setIsDiscoveryCallSelected(true);
     setServiceType('research');
-    // Scroll to discovery call button top edge at viewport top
-    setTimeout(() => {
-      const discoveryButton = document.getElementById('discovery-call-button');
-      if (discoveryButton) {
-        const rect = discoveryButton.getBoundingClientRect();
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const targetY = scrollTop + rect.top;
-        window.scrollTo({ top: targetY, behavior: 'smooth' });
-      }
-    }, 100);
+    // Scroll to top of page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Auto-scroll to discovery call button if URL has discovery=true parameter
+  // Auto-scroll to top of page if URL has discovery=true parameter
   useEffect(() => {
-    if (urlDiscovery && serviceType === 'research') {
-      // Wait for DOM to render, then scroll to button top edge
-      setTimeout(() => {
-        const discoveryButton = document.getElementById('discovery-call-button');
-        if (discoveryButton) {
-          const rect = discoveryButton.getBoundingClientRect();
-          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-          const targetY = scrollTop + rect.top;
-          window.scrollTo({ top: targetY, behavior: 'smooth' });
-        }
-      }, 300);
+    if (urlDiscovery && (serviceType === 'research' || urlService === 'research')) {
+      // Ensure serviceType is set to research if URL has it
+      if (urlService === 'research') {
+        setServiceType('research');
+      }
+      // Scroll to top of page
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }, [urlDiscovery, serviceType]);
+  }, [urlDiscovery, serviceType, urlService]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

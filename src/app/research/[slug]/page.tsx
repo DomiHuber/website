@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge'
 import ArticleContent, { ReadingControls } from '@/components/articles/ArticleContent'
 import ArticleDisclaimer from '@/components/articles/ArticleDisclaimer'
 import { getArticleBySlug, getAllArticles, getAuthorById } from '@/lib/content'
+import { getTeamMemberBySlug } from '@/lib/team'
 import ArticleSchema from '@/components/schema/ArticleSchema'
 
 interface PageProps {
@@ -111,9 +112,39 @@ export default async function ArticlePageRoute({ params }: PageProps) {
                     className="w-20 h-20 rounded-full object-cover"
                   />
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold mb-2">{author.name}</h3>
-                    <p className="text-muted-foreground mb-3">{author.role}</p>
-                    <p className="text-sm leading-relaxed mb-4">{author.bio}</p>
+                    {(() => {
+                      // Check if author is a fellow and make name clickable
+                      const articleToTeamSlugMap: Record<string, string> = {
+                        'dr-christian-decker': 'christian-decker',
+                      };
+                      const teamMemberSlug = articleToTeamSlugMap[article.author] || article.author;
+                      const teamMember = getTeamMemberBySlug(teamMemberSlug);
+                      const isFellow = teamMember?.category === 'fellow';
+                      
+                      if (isFellow) {
+                        return (
+                          <>
+                            <h3 className="text-xl font-semibold mb-2">
+                              <Link 
+                                href={`/fellows/${teamMemberSlug}`}
+                                className="link-research hover:underline"
+                              >
+                                {author.name}
+                              </Link>
+                            </h3>
+                            <p className="text-muted-foreground mb-3">{author.role}</p>
+                            <p className="text-sm leading-relaxed mb-4">{author.bio}</p>
+                          </>
+                        );
+                      }
+                      return (
+                        <>
+                          <h3 className="text-xl font-semibold mb-2">{author.name}</h3>
+                          <p className="text-muted-foreground mb-3">{author.role}</p>
+                          <p className="text-sm leading-relaxed mb-4">{author.bio}</p>
+                        </>
+                      );
+                    })()}
                     
                     {author.expertise && author.expertise.length > 0 && (
                       <div className="flex flex-wrap gap-2">
