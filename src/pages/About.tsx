@@ -71,7 +71,7 @@ const About = () => {
 
 
 
-      {/* Our Role */}
+      {/* What We Do */}
       <section className="swiss-section bg-white relative overflow-hidden">
         {/* Subtle background gradient */}
         <div className="absolute inset-0 swiss-blue-gradient-subtle opacity-50"></div>
@@ -81,10 +81,9 @@ const About = () => {
             <div className="flex items-center justify-center mb-6">
               <div className="swiss-blue-gradient-accent mx-auto"></div>
             </div>
-            <h2>Our Role</h2>
-            <p className="swiss-prose-lg max-w-3xl mx-auto text-gray-600 mb-12">
-              The Swiss Bitcoin Institute serves as an independent observer and evidence-based partner, 
-              bringing a Switzerland-first perspective to monetary evolution through cross-sector collaboration.
+            <h2>What We Do</h2>
+            <p className="swiss-prose-lg max-w-3xl mx-auto text-gray-600">
+              Three core offerings designed for Switzerland's decision-makers navigating the Bitcoin transition.
             </p>
           </div>
           
@@ -95,21 +94,21 @@ const About = () => {
                 description: "From 1:1 bespoke sessions to more formal courses",
                 icon: "🎓",
                 primaryCta: { text: "Explore options", link: "/education" },
-                secondaryCta: { text: "Book discovery Call", link: "/inquiry?service=courses" }
+                secondaryCta: { text: "Request Course Information", link: "/inquiry?service=courses#service-selection" }
               },
               {
                 title: "Research",
                 description: "Actionable insights on Bitcoin's strategic implications",
                 icon: "🧠",
                 primaryCta: { text: "View offering", link: "/research" },
-                secondaryCta: { text: "Next Free Webinar", link: "/webinar" }
+                secondaryCta: { text: "Book Discovery Call", link: "/inquiry?service=research&discovery=true#service-selection" }
               },
               {
                 title: "Speaking",
                 description: "Keynotes that get the message across and encourage reflection",
                 icon: "🎤",
                 primaryCta: { text: "View talks", link: "/speaking" },
-                secondaryCta: { text: "Book discovery Call", link: "/inquiry?service=speaking" }
+                secondaryCta: { text: "Submit Speaking Request", link: "/inquiry?service=speaking#service-selection" }
               }
             ].map((service, index) => (
               <div 
@@ -154,26 +153,6 @@ const About = () => {
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* More to Come Card */}
-          <div className="mt-12 max-w-4xl mx-auto">
-            <div className="card-general p-8 bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200">
-              <div className="text-center">
-                <h3 className="text-2xl font-semibold mb-3 text-gray-900">More to come in 2026!</h3>
-                <p className="text-gray-600 mb-6 text-base">
-                  We plan to expand our offering with much more. Stay tuned!
-                </p>
-                <CTAButton 
-                  variant="secondary" 
-                  size="lg" 
-                  href="/webinar"
-                  className="mx-auto"
-                >
-                  Tell me more
-                </CTAButton>
-              </div>
-            </div>
           </div>
         </div>
       </section>
