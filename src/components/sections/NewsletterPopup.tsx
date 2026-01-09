@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { X, Mail } from 'lucide-react';
+import { X, Mail, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
@@ -10,6 +10,7 @@ export default function NewsletterPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -52,12 +53,8 @@ export default function NewsletterPopup() {
       const data = await response.json();
 
       if (response.ok && data.success) {
-        toast({
-          title: "Successfully subscribed!",
-          description: "You'll receive our latest Bitcoin intelligence reports.",
-        });
+        setIsSubscribed(true);
         setEmail('');
-        setIsOpen(false);
       } else {
         toast({
           title: "Subscription failed",
@@ -104,51 +101,78 @@ export default function NewsletterPopup() {
 
           {/* Content */}
           <div className="p-8">
-            <div className="text-center mb-6">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-bitcoin-orange/10 mb-4">
-                <Mail className="w-8 h-8 text-bitcoin-orange" />
+            {isSubscribed ? (
+              /* Success State */
+              <div className="text-center py-4">
+                <div className="mb-6 flex justify-center">
+                  <div className="w-24 h-24 rounded-full bg-swiss-blue/10 flex items-center justify-center animate-in zoom-in-50 duration-500">
+                    <CheckCircle2 className="w-14 h-14 text-swiss-blue" strokeWidth={1.5} />
+                  </div>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  You're Subscribed!
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  Welcome aboard. You'll receive our latest Bitcoin intelligence reports directly to your inbox.
+                </p>
+                <Button
+                  onClick={() => setIsOpen(false)}
+                  variant="outline"
+                  className="text-swiss-blue border-swiss-blue hover:bg-swiss-blue/5"
+                >
+                  Close
+                </Button>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                Stay Informed on Bitcoin
-              </h3>
-              <p className="text-gray-600">
-                Get strategic insights, research updates, and exclusive analysis from Switzerland's leading Bitcoin think tank.
-              </p>
-            </div>
+            ) : (
+              /* Form State */
+              <>
+                <div className="text-center mb-6">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-bitcoin-orange/10 mb-4">
+                    <Mail className="w-8 h-8 text-bitcoin-orange" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                    Stay Informed on Bitcoin
+                  </h3>
+                  <p className="text-gray-600">
+                    Get strategic insights, research updates, and exclusive analysis from Switzerland's leading Bitcoin think tank.
+                  </p>
+                </div>
 
-            {/* Email Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <Input
-                type="email"
-                placeholder="your.email@company.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="h-12 text-base"
-                disabled={isSubmitting}
-              />
-              <Button
-                type="submit"
-                className="w-full h-12 text-base font-semibold swiss-blue-gradient text-white"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <>
-                    <span className="animate-spin mr-2">⏳</span>
-                    Subscribing...
-                  </>
-                ) : (
-                  <>
-                    <Mail className="w-4 h-4 mr-2" />
-                    Subscribe to Intelligence Brief
-                  </>
-                )}
-              </Button>
-            </form>
+                {/* Email Form */}
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <Input
+                    type="email"
+                    placeholder="your.email@company.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="h-12 text-base"
+                    disabled={isSubmitting}
+                  />
+                  <Button
+                    type="submit"
+                    className="w-full h-12 text-base font-semibold swiss-blue-gradient text-white"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <span className="animate-spin mr-2">⏳</span>
+                        Subscribing...
+                      </>
+                    ) : (
+                      <>
+                        <Mail className="w-4 h-4 mr-2" />
+                        Subscribe to Intelligence Brief
+                      </>
+                    )}
+                  </Button>
+                </form>
 
-            <p className="text-xs text-gray-500 text-center mt-4">
-              No spam. Unsubscribe anytime. Privacy-first approach.
-            </p>
+                <p className="text-xs text-gray-500 text-center mt-4">
+                  No spam. Unsubscribe anytime. Privacy-first approach.
+                </p>
+              </>
+            )}
           </div>
         </div>
       </div>
