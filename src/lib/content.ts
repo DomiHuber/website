@@ -226,6 +226,27 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
   }
 }
 
+/**
+ * Get articles by author slug
+ * Handles mapping of author slugs (e.g., "dr-christian-decker" <-> "christian-decker")
+ */
+export async function getArticlesByAuthor(authorSlug: string): Promise<Article[]> {
+  const allArticles = await getAllArticles();
+  
+  // Map author slug to article author slug if needed
+  // Articles use "dr-christian-decker", team members use "christian-decker"
+  const articleSlugMap: Record<string, string> = {
+    'christian-decker': 'dr-christian-decker',
+  };
+  
+  const articleAuthorSlug = articleSlugMap[authorSlug] || authorSlug;
+  
+  // Filter articles by author (check both the team member slug and the article author slug)
+  return allArticles.filter(article => 
+    article.author === authorSlug || article.author === articleAuthorSlug
+  );
+}
+
 export async function getAuthorById(id: string): Promise<Author | null> {
   try {
     const filePath = path.join(process.cwd(), 'src/content/authors', `${id}.md`);

@@ -6,10 +6,11 @@ import { ArrowLeft, Mail, Linkedin, ChevronLeft, ChevronRight, Github } from 'lu
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { getTeamMemberBySlug, getResearchFellows } from '@/lib/team';
-import { getAuthorById } from '@/lib/content';
+import { getAuthorById, getArticlesByAuthor } from '@/lib/content';
 import PersonSchema from '@/components/schema/PersonSchema';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import ArticleCard from '@/components/articles/ArticleCard';
 
 interface PageProps {
   params: {
@@ -61,6 +62,21 @@ export default async function FellowPage({ params }: PageProps) {
   // Try to get detailed author content from markdown file
   const author = await getAuthorById(member.slug);
 
+  // Get articles by this fellow
+  // The getArticlesByAuthor function handles slug mapping automatically
+  const fellowArticles = await getArticlesByAuthor(member.slug);
+  
+  // Sort articles by date (newest first)
+  fellowArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  
+  // Get authors for all articles
+  const articlesWithAuthors = await Promise.all(
+    fellowArticles.map(async (article) => {
+      const articleAuthor = await getAuthorById(article.author);
+      return { article, author: articleAuthor || undefined };
+    })
+  );
+
   // Get all fellows for navigation
   const allFellows = getResearchFellows();
   const currentIndex = allFellows.findIndex(f => f.slug === params.slug);
@@ -105,12 +121,6 @@ export default async function FellowPage({ params }: PageProps) {
 
               {/* Info */}
               <div className="flex-1 text-center md:text-left">
-                <div className="mb-4">
-                  <Badge variant="secondary" className="mb-4">
-                    Research Fellow
-                  </Badge>
-                </div>
-                
                 <h1 className="text-4xl font-bold mb-3 text-gray-900">
                   {member.name}
                 </h1>
@@ -293,6 +303,31 @@ export default async function FellowPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      {/* Articles Section */}
+      {fellowArticles.length > 0 && (
+        <section className="swiss-section bg-white">
+          <div className="swiss-grid">
+            <div className="max-w-7xl mx-auto">
+              <div className="mb-8 sm:mb-12">
+                <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-gray-900">Research & Articles</h2>
+                <p className="text-sm sm:text-base text-gray-600">
+                  {member.name.split(' ')[member.name.split(' ').length - 1]}'s contributions to Bitcoin intelligence and research.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                {articlesWithAuthors.map(({ article, author: articleAuthor }) => (
+                  <ArticleCard 
+                    key={article.slug} 
+                    article={article} 
+                    author={articleAuthor}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Navigation to Next/Previous Fellow */}
       {(nextFellow || prevFellow) && (

@@ -9,30 +9,58 @@ import { cn } from '@/lib/utils';
 type CookieConsent = {
   essential: boolean;
   analytics: boolean;
-  marketing: boolean;
 };
 
 const COOKIE_CONSENT_KEY = 'sbi-cookie-consent';
-const COOKIE_CONSENT_VERSION = '1.0';
+const COOKIE_CONSENT_VERSION = '1.1';
 
 export default function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
   const [showPreferences, setShowPreferences] = useState(false);
   const [consent, setConsent] = useState<CookieConsent>({
     essential: true, // Always true, can't be disabled
-    analytics: false,
-    marketing: false,
+    analytics: true, // Default to true
   });
 
   useEffect(() => {
     // Check if user has already given consent
     const savedConsent = localStorage.getItem(COOKIE_CONSENT_KEY);
     if (!savedConsent) {
+      // No consent yet - analytics defaults to true
       // Show banner after a short delay
       const timer = setTimeout(() => {
         setIsVisible(true);
       }, 1000);
       return () => clearTimeout(timer);
+    } else {
+      // Load existing consent
+      try {
+        const consentRecord = JSON.parse(savedConsent);
+        
+        // Migrate old consent records (v1.0 with marketing) to new format (v1.1 without marketing)
+        if (consentRecord.version === '1.0' && consentRecord.consent.marketing !== undefined) {
+          // Remove marketing from old consent and update version
+          const { marketing, ...migratedConsent } = consentRecord.consent;
+          const newConsentRecord = {
+            version: COOKIE_CONSENT_VERSION,
+            timestamp: consentRecord.timestamp,
+            consent: migratedConsent,
+          };
+          localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(newConsentRecord));
+          setConsent(migratedConsent);
+        } else if (consentRecord.consent) {
+          // Load existing consent
+          setConsent(consentRecord.consent);
+        }
+      } catch (error) {
+        // If parsing fails, show banner again with defaults
+        console.error('Error parsing consent record:', error);
+        localStorage.removeItem(COOKIE_CONSENT_KEY);
+        const timer = setTimeout(() => {
+          setIsVisible(true);
+        }, 1000);
+        return () => clearTimeout(timer);
+      }
     }
   }, []);
 
@@ -40,7 +68,6 @@ export default function CookieBanner() {
     const fullConsent: CookieConsent = {
       essential: true,
       analytics: true,
-      marketing: true,
     };
     saveConsent(fullConsent);
     setIsVisible(false);
@@ -49,8 +76,7 @@ export default function CookieBanner() {
   const handleRejectAll = () => {
     const minimalConsent: CookieConsent = {
       essential: true,
-      analytics: false,
-      marketing: false,
+      analytics: false, // User explicitly rejects analytics
     };
     saveConsent(minimalConsent);
     setIsVisible(false);
@@ -75,17 +101,8 @@ export default function CookieBanner() {
 
   const applyConsentPreferences = (consentData: CookieConsent) => {
     // Essential cookies are always enabled
-    // Analytics cookies (if consent given)
-    if (consentData.analytics) {
-      // Enable analytics tracking here if needed
-      // Example: gtag('consent', 'update', { analytics_storage: 'granted' });
-    }
-    
-    // Marketing cookies (if consent given)
-    if (consentData.marketing) {
-      // Enable marketing tracking here if needed
-      // Example: gtag('consent', 'update', { ad_storage: 'granted' });
-    }
+    // Analytics cookies - UmamiAnalytics component will handle script loading/unloading
+    // based on consent status via the useCookieConsent hook
   };
 
   const togglePreference = (key: keyof CookieConsent) => {
@@ -127,7 +144,7 @@ export default function CookieBanner() {
                   We Value Your Privacy
                 </h3>
                 <p className="text-sm text-gray-600 leading-relaxed mb-2">
-                  We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. 
+                  We use cookies to enhance your browsing experience and analyze site traffic. 
                   By clicking "Accept All", you consent to our use of cookies. You can customize your preferences or learn more in our{' '}
                   <Link 
                     href="/privacy" 
@@ -238,34 +255,6 @@ export default function CookieBanner() {
                   </div>
                 </div>
 
-                {/* Marketing Cookies */}
-                <div className="p-4 rounded-lg border border-gray-200 bg-white">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-gray-900 mb-2">Marketing Cookies</h4>
-                      <p className="text-sm text-gray-600">
-                        These cookies are used to deliver personalized advertisements and track campaign performance. They may be set by our advertising partners.
-                      </p>
-                    </div>
-                    <div className="flex-shrink-0">
-                      <button
-                        onClick={() => togglePreference('marketing')}
-                        className={cn(
-                          "relative w-12 h-6 rounded-full transition-colors duration-200",
-                          consent.marketing ? "bg-swiss-blue" : "bg-gray-300"
-                        )}
-                        aria-label="Toggle marketing cookies"
-                      >
-                        <span
-                          className={cn(
-                            "absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform duration-200",
-                            consent.marketing ? "translate-x-6" : "translate-x-0"
-                          )}
-                        />
-                      </button>
-                    </div>
-                  </div>
-                </div>
               </div>
 
               {/* Save Button */}

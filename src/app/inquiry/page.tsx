@@ -28,8 +28,8 @@ export default function InquiryPage() {
         <div className="absolute inset-0 swiss-blue-gradient-hero"></div>
         <div className="swiss-grid relative">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-8 text-gray-900">Get Started with SBI</h1>
-            <p className="swiss-prose-lg mb-12 max-w-3xl mx-auto text-gray-700 leading-relaxed">
+            <h1 className="mb-4 sm:mb-6 text-gray-900">Get Started with SBI</h1>
+            <p className="swiss-prose-lg mb-4 sm:mb-6 max-w-3xl mx-auto text-gray-700 leading-relaxed">
               Whether you need strategic Bitcoin intelligence, executive education, or a speaker for your event,
               we're here to help. Tell us what you're looking for.
             </p>
@@ -38,7 +38,7 @@ export default function InquiryPage() {
       </section>
 
       {/* Form Section */}
-      <section className="swiss-section bg-white">
+      <section className="py-6 sm:py-8 md:py-12 bg-white">
         <div className="swiss-grid">
           <Suspense fallback={<div>Loading form...</div>}>
             <LeadIntakeForm />

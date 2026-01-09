@@ -116,7 +116,7 @@ const Contact = () => {
       </section>
 
       {/* Contact Form */}
-      <section className="swiss-section bg-white">
+      <section className="swiss-section-sm sm:swiss-section bg-white">
         <div className="swiss-grid">
           <div className="max-w-3xl mx-auto">
             {isSubmitted ? (
@@ -142,16 +142,6 @@ const Contact = () => {
             ) : (
               /* Form */
               <>
-                <div className="text-center mb-12">
-                  <div className="flex items-center justify-center mb-6">
-                    <div className="swiss-blue-gradient-accent mx-auto"></div>
-                  </div>
-                  <h2>Send Us a Message</h2>
-                  <p className="swiss-prose max-w-2xl mx-auto text-gray-600 mt-4">
-                    Tell us about your Bitcoin education and strategy needs.
-                  </p>
-                </div>
-                
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>

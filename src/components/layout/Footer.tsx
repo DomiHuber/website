@@ -42,7 +42,7 @@ const Footer = () => {
       href: '/glossary'
     }, {
       name: 'Get Started',
-      href: '/inquiry'
+      href: '/inquiry?service=research&discovery=true'
     }],
     legal: [{
       name: 'Privacy Policy',

@@ -83,7 +83,7 @@ export default function StrategicSpeaking() {
                         <line x1="8" x2="8" y1="2" y2="6"></line>
                         <line x1="3" x2="21" y1="10" y2="10"></line>
                       </svg>
-                      <span>ETH Zürich, 2025</span>
+                      <span>ETH Zürich, May 2025</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -146,7 +146,7 @@ export default function StrategicSpeaking() {
                         <line x1="8" x2="8" y1="2" y2="6"></line>
                         <line x1="3" x2="21" y1="10" y2="10"></line>
                       </svg>
-                      <span>Swiss Bitcoin Conference, 2024</span>
+                      <span>Swiss Bitcoin Conference, April 2025</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -154,7 +154,7 @@ export default function StrategicSpeaking() {
                         <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
                         <path d="M2 12h20"></path>
                       </svg>
-                      <span>German presentation, English slides (SBI branded)</span>
+                      <span>German presentation, English slides</span>
                     </div>
                   </div>
                   <div className="mt-auto">
@@ -209,7 +209,7 @@ export default function StrategicSpeaking() {
                         <line x1="8" x2="8" y1="2" y2="6"></line>
                         <line x1="3" x2="21" y1="10" y2="10"></line>
                       </svg>
-                      <span>Bitcoin Alps, 2024</span>
+                      <span>Bitcoin Alps, December 2024</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

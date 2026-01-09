@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 export type CookieConsent = {
   essential: boolean;
   analytics: boolean;
-  marketing: boolean;
 };
 
 const COOKIE_CONSENT_KEY = 'sbi-cookie-consent';
@@ -40,7 +39,6 @@ export function useCookieConsent() {
     consent,
     hasConsented,
     hasAnalyticsConsent: consent?.analytics ?? false,
-    hasMarketingConsent: consent?.marketing ?? false,
   };
 }
 
