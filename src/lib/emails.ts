@@ -32,7 +32,6 @@ export const SERVICE_EMAIL_CONTENT: Record<ServiceType, { title: string; message
 const EMAIL_FOOTER = `
 --
 Swiss Bitcoin Institute
-Zurich, Switzerland
 https://bitcoininstitute.ch`.trim();
 
 // Helper to format field labels from camelCase to readable text
@@ -263,7 +262,7 @@ ${'-'.repeat(40)}
 What happens next?
 We will review your registration and send you a confirmation with payment details and further information about the course within 1-2 business days.
 
-If you have any questions in the meantime, feel free to reply to this email.
+If you have any questions in the meantime, feel free to contact education@bitcoininstitute.ch.
 
 Best regards,
 The Swiss Bitcoin Institute Team
@@ -272,7 +271,7 @@ ${EMAIL_FOOTER}
   `.trim();
 
   return {
-    subject: `Course Booking Confirmation - ${formData.courseName}`,
+    subject: `Course Booking Confirmation: ${formData.courseName}`,
     text,
   };
 }

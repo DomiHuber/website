@@ -7,8 +7,17 @@ export interface CourseOffering {
 export const bitcoinForExecutivesCourses: CourseOffering[] = [
   {
     id: "bfe-feb-2026",
-    timeDescription: "4 afternoons (14-17h)",
-    dates: ["12th February", "19th February", "26th February", "5th March 2026"]
+    timeDescription: "Four afternoons (14-17h)",
+    dates: ["12 February 2026", "19 February 2026", "26 February 2026", "05 March 2026"]
+  }
+];
+
+// added by MD 10.01.42
+export const FinSovCourses: CourseOffering[] = [
+  {
+    id: "finsov-mar-2026",
+    timeDescription: "Half a day (13:30-17:30h)",
+    dates: ["12 March 2026"]
   }
 ];
 
