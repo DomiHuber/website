@@ -10,7 +10,7 @@ const NewsletterSection = () => {
   const { email, setEmail, isSubmitting, isSubscribed, subscribe } = useNewsletterSubscription();
 
   return (
-    <section id="newsletter" className="swiss-section bg-white">
+    <section id="newsletter" className="swiss-section bg-white scroll-mt-24">
       <div className="swiss-grid">
         <div className="max-w-4xl mx-auto">
           <Card className="border-2 border-swiss-blue/20 shadow-xl">
