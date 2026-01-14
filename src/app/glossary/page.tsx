@@ -220,7 +220,7 @@ export default function GlossaryPage() {
                         <div className="mb-3">
                           <Badge variant="outline" className="text-xs">
                             SBI-{term.relatedArticle.padStart(3, '0')}
-                          </Badge>
+                        </Badge>
                         </div>
                       )}
                       

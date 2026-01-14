@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm';
 import Link from 'next/link';
 import GlossaryLink from './GlossaryLink';
 import { slugify } from './TableOfContents';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 interface GlossaryTerm {
   term: string;
@@ -15,11 +16,18 @@ interface GlossaryTerm {
 
 interface ArticleWithGlossaryProps {
   content: string;
+  articleId?: string;
 }
 
-export default function ArticleWithGlossary({ content }: ArticleWithGlossaryProps) {
+// Article-specific glossary term exclusions (terms that shouldn't be linked in specific articles)
+const ARTICLE_GLOSSARY_EXCLUSIONS: Record<string, string[]> = {
+  'SBI-008': ['mining', 'difficulty'], // In SBI-008, "mining" and "difficulty" refer to gold mining, not Bitcoin
+};
+
+export default function ArticleWithGlossary({ content, articleId }: ArticleWithGlossaryProps) {
   const [glossaryTerms, setGlossaryTerms] = useState<GlossaryTerm[]>([]);
   const [processedContent, setProcessedContent] = useState(content);
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
 
   useEffect(() => {
     // Load glossary terms directly from the glossary page route
@@ -34,6 +42,10 @@ export default function ArticleWithGlossary({ content }: ArticleWithGlossaryProp
         const terms: GlossaryTerm[] = await response.json();
         setGlossaryTerms(terms);
         
+        // Get excluded term slugs for this article
+        const excludedSlugs = articleId ? ARTICLE_GLOSSARY_EXCLUSIONS[articleId] || [] : [];
+        const excludedSlugSet = new Set(excludedSlugs);
+        
         // Process content to add glossary links
         let newContent = content;
         const highlightedSlugs = new Set<string>();
@@ -42,7 +54,8 @@ export default function ArticleWithGlossary({ content }: ArticleWithGlossaryProp
         const sortedTerms = [...terms].sort((a, b) => b.term.length - a.term.length);
         
         for (const term of sortedTerms) {
-          if (highlightedSlugs.has(term.slug)) continue;
+          // Skip if already highlighted or if excluded for this article
+          if (highlightedSlugs.has(term.slug) || excludedSlugSet.has(term.slug)) continue;
           
           // Match whole words only, case insensitive
           const regex = new RegExp(`\\b(${term.term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})\\b`, 'i');
@@ -66,10 +79,11 @@ export default function ArticleWithGlossary({ content }: ArticleWithGlossaryProp
   }, [content]);
 
   return (
-    <div className="prose prose-lg max-w-none" style={{ lineHeight: '1.75' }}>
-      <ReactMarkdown 
-        remarkPlugins={[remarkGfm]}
-        components={{
+    <>
+      <div className="prose prose-lg max-w-none" style={{ lineHeight: '1.75' }}>
+        <ReactMarkdown 
+          remarkPlugins={[remarkGfm]}
+          components={{
           h1: ({ children }) => {
             const text = String(children);
             const id = slugify(text);
@@ -116,6 +130,24 @@ export default function ArticleWithGlossary({ content }: ArticleWithGlossaryProp
               {children}
             </pre>
           ),
+          img: ({ src, alt }) => {
+            // Check if this is a figure image (in /sbi-intelligence-brief-figures/ directory)
+            const isFigure = src?.includes('/sbi-intelligence-brief-figures/');
+            
+            if (isFigure && src) {
+              return (
+                <img
+                  src={src}
+                  alt={alt || ''}
+                  className="cursor-pointer hover:opacity-90 transition-opacity my-6 rounded-lg"
+                  onClick={() => setLightboxImage({ src, alt: alt || '' })}
+                />
+              );
+            }
+            
+            // Regular images (non-figures) render normally
+            return <img src={src} alt={alt || ''} className="my-6 rounded-lg" />;
+          },
           a: ({ href, children, title }) => {
             // Style glossary links specially with custom tooltip
             if (href?.startsWith('/glossary/')) {
@@ -176,9 +208,25 @@ export default function ArticleWithGlossary({ content }: ArticleWithGlossaryProp
           ),
         }}
       >
-        {processedContent}
-      </ReactMarkdown>
-    </div>
+          {processedContent}
+        </ReactMarkdown>
+      </div>
+      
+      {/* Lightbox Dialog for Figure Images */}
+      <Dialog open={!!lightboxImage} onOpenChange={(open) => !open && setLightboxImage(null)}>
+        <DialogContent className="max-w-4xl max-h-[90vh] p-0 bg-transparent border-none">
+          {lightboxImage && (
+            <div className="relative w-full h-full flex items-center justify-center">
+              <img
+                src={lightboxImage.src}
+                alt={lightboxImage.alt}
+                className="max-w-full max-h-[90vh] object-contain rounded-lg"
+              />
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
 

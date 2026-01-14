@@ -140,9 +140,9 @@ export default async function ArticlePageRoute({ params }: PageProps) {
                       }
                       return (
                         <>
-                          <h3 className="text-xl font-semibold mb-2">{author.name}</h3>
-                          <p className="text-muted-foreground mb-3">{author.role}</p>
-                          <p className="text-sm leading-relaxed mb-4">{author.bio}</p>
+                    <h3 className="text-xl font-semibold mb-2">{author.name}</h3>
+                    <p className="text-muted-foreground mb-3">{author.role}</p>
+                    <p className="text-sm leading-relaxed mb-4">{author.bio}</p>
                         </>
                       );
                     })()}

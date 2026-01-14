@@ -123,8 +123,8 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
         <h2 className="text-lg font-semibold text-gray-900 leading-[1.5rem]">Table of Contents</h2>
       </div>
       
-      <ol className="space-y-2">
-        {headings.map((heading, index) => (
+      <ul className="space-y-2">
+        {headings.map((heading) => (
           <li
             key={heading.id}
             className={`${
@@ -145,14 +145,11 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                 ${heading.level === 2 ? 'font-medium' : heading.level === 3 ? 'font-normal' : 'font-normal text-xs'}
               `}
             >
-              <span className="text-gray-400 font-normal mr-2">
-                {String(index + 1).padStart(2, '0')}.
-              </span>
               {heading.text}
             </a>
           </li>
         ))}
-      </ol>
+      </ul>
     </nav>
   );
 }

@@ -22,14 +22,14 @@ export default function NewsletterButton({
     
     // Function to try opening MailerLite popup
     const tryOpenPopup = () => {
-      if (typeof window !== 'undefined' && (window as any).ml) {
-        try {
-          (window as any).ml('show', 'K1pHki', true);
+    if (typeof window !== 'undefined' && (window as any).ml) {
+      try {
+        (window as any).ml('show', 'K1pHki', true);
           return true;
-        } catch (error) {
-          console.error('MailerLite popup error:', error);
+      } catch (error) {
+        console.error('MailerLite popup error:', error);
           return false;
-        }
+      }
       }
       return false;
     };
@@ -52,7 +52,7 @@ export default function NewsletterButton({
           const newsletterSection = document.getElementById('newsletter');
           if (newsletterSection) {
             newsletterSection.scrollIntoView({ behavior: 'smooth' });
-          }
+    }
         }
       }
     }, 300);

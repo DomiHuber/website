@@ -43,8 +43,8 @@ export default function StrategicSpeaking() {
               <h2>Featured Presentations</h2>
               <p className="swiss-prose max-w-3xl mx-auto text-gray-600">
                 Recent talks exploring Bitcoin's strategic dimensions across different contexts.
-              </p>
-            </div>
+                </p>
+              </div>
 
             {/* Talk 1: Policy/Government */}
             <div className="card-general card-gradient-hover mb-8 overflow-hidden">
@@ -95,19 +95,19 @@ export default function StrategicSpeaking() {
                     </div>
                   </div>
                   <div className="mt-auto">
-                    <a
-                      href="https://istp.ethz.ch/events/colloquia/2025/fs/colloquium-recording--dr-marcus-dapp.html"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                  <a
+                    href="https://istp.ethz.ch/events/colloquia/2025/fs/colloquium-recording--dr-marcus-dapp.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
                       className="link-research inline-flex items-center gap-2"
-                    >
+                  >
                       View full recording
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <line x1="10" x2="21" y1="14" y2="3"></line>
-                      </svg>
-                    </a>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" x2="21" y1="14" y2="3"></line>
+                    </svg>
+                  </a>
                   </div>
                 </div>
               </div>
@@ -158,19 +158,19 @@ export default function StrategicSpeaking() {
                     </div>
                   </div>
                   <div className="mt-auto">
-                    <a
-                      href="https://www.youtube.com/watch?v=YBaL_iNleTA"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                  <a
+                    href="https://www.youtube.com/watch?v=YBaL_iNleTA"
+                    target="_blank"
+                    rel="noopener noreferrer"
                       className="link-research inline-flex items-center gap-2"
-                    >
-                      Watch on YouTube
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <line x1="10" x2="21" y1="14" y2="3"></line>
-                      </svg>
-                    </a>
+                  >
+                    Watch on YouTube
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" x2="21" y1="14" y2="3"></line>
+                    </svg>
+                  </a>
                   </div>
                 </div>
               </div>
@@ -221,21 +221,21 @@ export default function StrategicSpeaking() {
                     </div>
                   </div>
                   <div className="mt-auto">
-                    <a
-                      href="https://www.youtube.com/watch?v=hi0r08pUrh4"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                  <a
+                    href="https://www.youtube.com/watch?v=hi0r08pUrh4"
+                    target="_blank"
+                    rel="noopener noreferrer"
                       className="link-research inline-flex items-center gap-2"
-                    >
-                      Watch on YouTube
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <line x1="10" x2="21" y1="14" y2="3"></line>
-                      </svg>
-                    </a>
-                  </div>
+                  >
+                    Watch on YouTube
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" x2="21" y1="14" y2="3"></line>
+                    </svg>
+                  </a>
                 </div>
+              </div>
               </div>
             </div>
           </div>
