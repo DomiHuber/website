@@ -235,7 +235,7 @@ const Research = () => {
       </section>
 
       {/* Latest Reports */}
-      <section className="swiss-section bg-gradient-to-b from-gray-50 to-white">
+      <section id="intelligence" className="swiss-section bg-gradient-to-b from-gray-50 to-white scroll-mt-24">
         <div className="swiss-grid">
           <div className="text-center mb-16">
             <div className="flex items-center justify-center mb-6">

@@ -21,9 +21,13 @@ const getHeaderImagePath = (articleId: string, slug: string): string | null => {
     return `/sbi-research-headers/${slugToImageMap[slug]}.webp`;
   }
   
-  // Then check if ID matches SBI-XXX pattern (SBI-001 -> sbi-001.webp)
+  // Then check if ID matches SBI-XXX pattern (SBI-001 -> sbi-001.webp or sbi-001.jpg)
   const normalizedId = articleId.toLowerCase();
   if (normalizedId.match(/^sbi-\d{3}$/)) {
+    // For SBI-008, use .jpg extension, otherwise default to .webp
+    if (normalizedId === 'sbi-008') {
+      return `/sbi-research-headers/${normalizedId}.jpg`;
+    }
     return `/sbi-research-headers/${normalizedId}.webp`;
   }
   
