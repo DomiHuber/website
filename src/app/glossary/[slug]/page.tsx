@@ -92,10 +92,10 @@ export default async function GlossaryTermPage({ params }: PageProps) {
                 })}
               </div>
             ) : term.category ? (
-              <Badge variant="secondary" className="flex items-center gap-2">
-                <BookOpen className="w-3 h-3" />
-                {term.category}
-              </Badge>
+            <Badge variant="secondary" className="flex items-center gap-2">
+              <BookOpen className="w-3 h-3" />
+              {term.category}
+            </Badge>
             ) : null}
           </div>
         </div>

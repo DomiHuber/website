@@ -127,7 +127,7 @@ const ArticleContent = ({ article, author }: ArticleContentProps) => {
       
       {/* Article Content with Glossary */}
       <div className="article-content transition-all duration-200">
-        <ArticleWithGlossary content={article.content} />
+        <ArticleWithGlossary content={article.content} articleId={article.id} />
       </div>
     </article>
   );

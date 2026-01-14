@@ -235,18 +235,18 @@ const Home = () => {
                       </div>
                     )}
                     <div className="p-6">
-                      <div className="flex items-center justify-between mb-4">
-                        <Badge variant="tagBlue">Research</Badge>
-                        <span className="text-gray-500 text-sm">{highlight.readTime}</span>
-                      </div>
-                      <h3 className="text-xl font-semibold mb-4 text-gray-900">
-                        {highlight.title}
-                      </h3>
-                      <p className="text-gray-700 leading-relaxed mb-6">{highlight.description}</p>
-                      <div className="link-research text-sm">
-                        Read Analysis →
-                      </div>
-                    </div>
+                  <div className="flex items-center justify-between mb-4">
+                    <Badge variant="tagBlue">Research</Badge>
+                    <span className="text-gray-500 text-sm">{highlight.readTime}</span>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-4 text-gray-900">
+                    {highlight.title}
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed mb-6">{highlight.description}</p>
+                  <div className="link-research text-sm">
+                    Read Analysis →
+                  </div>
+                </div>
                   </div>
                 </Link>
               );
