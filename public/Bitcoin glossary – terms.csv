@@ -5,7 +5,7 @@
 ;next to go;;;
 ;good to go;;;
 ;published;;;
-;;;;test
+;;;;
 ;;;;
 Term;Status;Reviewed?;Description;Intelligence brief linked
 Anarcho Capitalism;?;AI written;Anarcho-capitalism is a political philosophy advocating for the elimination of the state in favor of voluntary exchange and private property rights. In the context of Bitcoin, it is associated with the idea that decentralized money enables economic systems independent of state control.;
@@ -180,3 +180,4 @@ UTXO Set;published;human written;The UTXO set is the complete collection of al
 ;;;;
 
 ;;;;
+
