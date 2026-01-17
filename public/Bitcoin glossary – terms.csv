@@ -5,7 +5,7 @@
 ;next to go;;;
 ;good to go;;;
 ;published;;;
-;;;;
+;;;;test
 ;;;;
 Term;Status;Reviewed?;Description;Intelligence brief linked
 Anarcho Capitalism;?;AI written;Anarcho-capitalism is a political philosophy advocating for the elimination of the state in favor of voluntary exchange and private property rights. In the context of Bitcoin, it is associated with the idea that decentralized money enables economic systems independent of state control.;
@@ -178,4 +178,5 @@ UTXO – Unspent Transaction Output;published;human written;An unspent transacti
 UTXO Management;published;human written;UTXO management refers to the strategy and handling of multiple unspent transaction outputs within a wallet. Efficient UTXO management reduces transaction fees, avoids unnecessary address reuse, and minimizes privacy leaks. It also ensures that inputs are selected in a way that balances performance, cost, and long-term usability of the UTXO set.;
 UTXO Set;published;human written;The UTXO set is the complete collection of all currently spendable transaction outputs in the Bitcoin system. It represents the global state of bitcoin ownership and is maintained by all full nodes.;
 ;;;;
+
 ;;;;
