@@ -120,7 +120,7 @@ export default function FinancialSovereigntyPage() {
             {/* Price */}
             <div className="text-center mb-8">
               <div className="inline-block p-6 border-2 border-gray-200 rounded-lg bg-gray-50">
-                <div className="text-3xl font-bold text-gray-900 mb-1">CHF 349.-</div>
+                <div className="text-3xl font-bold text-gray-900 mb-1">CHF 749.-</div>
                 <div className="text-sm text-gray-600">(incl. 50.- in sats)</div>
               </div>
             </div>
@@ -139,7 +139,7 @@ export default function FinancialSovereigntyPage() {
                 </Card>
                 {/* Event Flyer Download */}
                 <CourseFlyerActions
-                  flyerPath="/sbi-event-flyers/SBI-FinSov-Flyer_26.png"
+                  flyerPath="/sbi-event-flyers/SBI-FinSov-Course_12-3-26.png"
                 />
               </div>
 
